@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cinzel Decorative", "Cinzel", Georgia, serif;
+  --font-cinzel: "Cinzel", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-rozha: "Rozha One", serif;
+
+  --color-royal-crimson: #801B31;
+  --color-royal-crimson-dark: #4A0E1C;
+  --color-royal-emerald: #0E3B2F;
+  --color-royal-gold: #D4AF37;
+  --color-royal-gold-light: #F7E5A9;
+  --color-royal-gold-dark: #9A7B38;
+  --color-royal-ivory: #FCFAF6;
+  --color-royal-parchment: #F4EBD9;
+}
+
+/* Custom Royal Textures & Effects */
+.gold-foil-text {
+  background: linear-gradient(135deg, #FFF1C5 0%, #D4AF37 40%, #AA8222 70%, #FFF5D6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-foil-border {
+  border-image: linear-gradient(135deg, #D4AF37, #FFF1C5, #9A7B38, #F7E5A9) 1;
+}
+
+.wax-seal-shadow {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.deckle-edge {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 2px 10px rgba(212, 175, 55, 0.15);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1A050B;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F7E5A9;
+}
