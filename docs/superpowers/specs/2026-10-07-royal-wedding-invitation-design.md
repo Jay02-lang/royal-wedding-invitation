@@ -68,17 +68,20 @@ d:/Wedding/
 
 ---
 
-## 3. Visual & Design System
+## 3. Visual & Design System (Hyper-Realistic & Tactile Fidelity)
 
-### 3.1 Color Palette
-* **Royal Crimson / Sindoor**: `#801B31` (Primary accents, seals, regal borders)
-* **Imperial Emerald**: `#0E3B2F` (Sangeet theme and evening contrast)
-* **Metallic Gold Gradients**:
-  * Light: `#F7E5A9`
-  * Mid: `#D4AF37`
-  * Deep: `#9A7B38`
-* **Neutral Ivory Ground**: `#FCFAF6` and `#F5EFEB`
-* **Obsidian Charcoal Text**: `#1A1615` (High-contrast, elegant readability)
+### 3.1 Materiality & Physical Textures
+* **Handmade Deckle-Edge Rag Paper**: Subtle fibrous texture, warm ivory paper grain, and soft drop-shadow depth mimicking heavy 350gsm cotton wedding cardstock.
+* **3D Embossed Wax Seal**: Tactile depth with radial specular lighting highlights, slight irregular molten wax drips, and micro-embossed metallic gold monogram stamping (`A & A`).
+* **Gold Foil Leaf Stamping**: Realistic metallic gradient reflection with CSS specular sheen highlights simulating hot-stamped gold foil along card borders and arch filigree.
+* **Realistic Petal Dynamics**: Distinct botanical rendering for Kashmiri red rose petals and ruffled golden marigold (Genda) petals with 3D tumbling physics (variable mass, flutter angle, wind drift, and rotational drag).
+
+### 3.2 Color Palette
+* **Royal Crimson / Sindoor**: `#801B31` and `#5D1022` (Deep bridal velvet & wax)
+* **Imperial Emerald**: `#0E3B2F` and `#07261E` (Palace courtyard velvet)
+* **Antique Metallic Gold**: `#D4AF37`, `#F5E298`, and `#8F732A` (Hot-stamped metallic luster)
+* **Handmade Alabaster & Raw Silk**: `#FCFAF6` and `#F7F2E8` (60% grounding)
+* **Obsidian Charcoal & Royal Ink**: `#1A1615` (Deep pigmented calligraphic text)
 
 ### 3.2 Typography Tokens
 * **Headline / Display Serif**: *Cinzel Decorative* / *Cinzel* (Royalty, Monograms, Titles)
