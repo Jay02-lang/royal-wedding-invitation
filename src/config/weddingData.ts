@@ -26,8 +26,8 @@ export const WEDDING_DATA: WeddingConfig = {
   mainWeddingDate: '2026-11-28T16:30:00+05:30', // Big Day: Royal Pheras at sunset
   invitationNote: 'With the divine blessings of our beloved ancestors and the Almighty, the royal families of Mewar and Jaipur cordially invite you to celebrate the joyous wedding festivities of our children.',
   
-  // Custom video background provided by user or default palace loop
-  backgroundVideoUrl: '/video/wedding-bg.mp4',
+  // Custom video background provided by user
+  backgroundVideoUrl: '/video/14249219_1920_1080_100fps.mp4',
   backgroundFallbackPoster: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2000&q=85',
 
   events: [
