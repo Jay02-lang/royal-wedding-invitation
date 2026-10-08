@@ -23,7 +23,7 @@ export const InvitationHero: React.FC<InvitationHeroProps> = ({
           className="mb-8 flex flex-col items-center"
         >
           <img
-            src="/ganesha-hero.png"
+            src={`${import.meta.env.BASE_URL}ganesha-hero.png`}
             alt="Lord Ganesha"
             className="w-40 sm:w-56 md:w-64 object-contain opacity-90 drop-shadow-md"
           />

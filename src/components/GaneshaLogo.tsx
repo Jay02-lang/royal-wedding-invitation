@@ -8,6 +8,10 @@ export const GaneshaLogo: React.FC<GaneshaLogoProps> = ({
   className = "w-16 h-16",
 }) => {
   return (
-    <img src="/ganesha-logo.png" alt="Lord Ganesha" className={className} />
+    <img
+      src={`${import.meta.env.BASE_URL}ganesha-logo.png`}
+      alt="Lord Ganesha"
+      className={className}
+    />
   );
 };

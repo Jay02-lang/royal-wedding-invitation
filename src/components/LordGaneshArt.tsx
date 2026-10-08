@@ -16,11 +16,11 @@ export const LordGaneshArt: React.FC<{
       <div
         className="relative z-10 w-full h-full"
         style={{
-          WebkitMaskImage: "url(/ganesha_fixed.png)",
+          WebkitMaskImage: `url(${import.meta.env.BASE_URL}ganesha_fixed.png)`,
           WebkitMaskSize: "contain",
           WebkitMaskRepeat: "no-repeat",
           WebkitMaskPosition: "center",
-          maskImage: "url(/ganesha_fixed.png)",
+          maskImage: `url(${import.meta.env.BASE_URL}ganesha_fixed.png)`,
           maskSize: "contain",
           maskRepeat: "no-repeat",
           maskPosition: "center",

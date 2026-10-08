@@ -27,7 +27,7 @@ export const WEDDING_DATA: WeddingConfig = {
   invitationNote: 'With the grace of the Almighty and the blessings of our ancestors, we warmly invite you to share in our joy and celebrate the beautiful wedding festivities of our children.',
   
   // Custom video background provided by user
-  backgroundVideoUrl: '/video/14249219_1920_1080_100fps.mp4',
+  backgroundVideoUrl: `${import.meta.env.BASE_URL}video/14249219_1920_1080_100fps.mp4`,
   backgroundFallbackPoster: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2000&q=85',
 
   events: [

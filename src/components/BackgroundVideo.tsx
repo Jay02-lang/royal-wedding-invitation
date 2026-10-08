@@ -28,17 +28,52 @@ export const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
   overlayOpacity = "bg-white/40 backdrop-blur-sm",
 }) => {
   const [hasError, setHasError] = useState(false);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  const resolvedVideoSrc = React.useMemo(() => {
+    if (!videoSrc) return "";
+    if (
+      videoSrc.startsWith("http://") ||
+      videoSrc.startsWith("https://") ||
+      videoSrc.startsWith("data:")
+    ) {
+      return videoSrc;
+    }
+    const cleanPath = videoSrc.replace(/^\.?\//, "");
+    const base = import.meta.env.BASE_URL.endsWith("/")
+      ? import.meta.env.BASE_URL
+      : `${import.meta.env.BASE_URL}/`;
+    return `${base}${cleanPath}`;
+  }, [videoSrc]);
+
+  React.useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn("Background video autoplay blocked:", err);
+        });
+      }
+    }
+  }, [resolvedVideoSrc]);
+
   const playbackProps = getVideoPlaybackProps();
-  const showFallback = shouldShowFallback(hasError, videoSrc);
+  const showFallback = shouldShowFallback(hasError, resolvedVideoSrc);
 
   return (
     <div className="fixed inset-0 w-full h-full -z-20 overflow-hidden pointer-events-none select-none">
       {!showFallback ? (
         <video
+          ref={videoRef}
           {...playbackProps}
-          src={videoSrc}
+          src={resolvedVideoSrc}
           poster={posterSrc}
-          onError={() => setHasError(true)}
+          onError={(e) => {
+            console.error("Video load error for:", resolvedVideoSrc, e);
+            setHasError(true);
+          }}
           className="w-full h-full object-cover scale-105 motion-safe:transition-transform duration-1000"
         />
       ) : (
