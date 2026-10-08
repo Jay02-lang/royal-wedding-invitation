@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { WEDDING_DATA } from './config/weddingData';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { RSVPSubmission, GuestBlessing } from './types/wedding';
+import { GuestBlessing } from './types/wedding';
 
 import { BackgroundVideo } from './components/BackgroundVideo';
-import { PetalCanvas } from './components/PetalCanvas';
-import { NavigationBar } from './components/NavigationBar';
 import { WaxSealEnvelope } from './components/WaxSealEnvelope';
 import { InvitationHero } from './components/InvitationHero';
-import { CoupleStory } from './components/CoupleStory';
+import { CoupleIntro } from './components/CoupleIntro';
 import { ItinerarySection } from './components/ItinerarySection';
 import { PalaceConcierge } from './components/PalaceConcierge';
+import { GallerySection } from './components/GallerySection';
 import { BlessingWall } from './components/BlessingWall';
-import { RSVPModal } from './components/RSVPModal';
-import { LordGanesh } from './components/LordGanesh';
+
 import { Heart, Sparkles } from 'lucide-react';
 
 const INITIAL_BLESSINGS: GuestBlessing[] = [
@@ -42,155 +40,110 @@ const INITIAL_BLESSINGS: GuestBlessing[] = [
 
 export default function App() {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
-  const [isRsvpOpen, setIsRsvpOpen] = useState(false);
-  
-  // Persistent RSVPs and Blessings in localStorage
-  const [rsvps, setRsvps] = useLocalStorage<RSVPSubmission[]>('royal_wedding_rsvps', []);
-  const [blessings, setBlessings] = useLocalStorage<GuestBlessing[]>('royal_wedding_blessings', INITIAL_BLESSINGS);
 
-  const handleRsvpSubmit = (newRsvp: RSVPSubmission) => {
-    setRsvps(prev => [newRsvp, ...prev]);
-  };
+  // Force scroll to top on every refresh and disable browser scroll restoration
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+    
+  // Persistent Blessings in localStorage
+    const [blessings, setBlessings] = useLocalStorage<GuestBlessing[]>('royal_wedding_blessings', INITIAL_BLESSINGS);
 
-  const handleAddBlessing = (newBlessing: GuestBlessing) => {
+    const handleAddBlessing = (newBlessing: GuestBlessing) => {
     setBlessings(prev => [newBlessing, ...prev]);
   };
 
   return (
-    <div className="min-h-screen bg-[#120407] text-[#FCFAF6] font-sans antialiased relative selection:bg-[#D4AF37] selection:text-[#120407]">
+    <div className="min-h-[100dvh] bg-transparent text-[#1A1A1A] font-sans antialiased relative selection:bg-[#D4AF37] selection:text-[#FAFAFA]">
       
       {/* 1. Customizable Background Video Layer with Fallbacks */}
       <BackgroundVideo
         videoSrc={WEDDING_DATA.backgroundVideoUrl}
         posterSrc={WEDDING_DATA.backgroundFallbackPoster}
-        overlayOpacity="bg-black/50"
+        overlayOpacity="bg-white/40 backdrop-blur-sm"
       />
 
-      {/* 2. High-Performance Falling Petal Canvas (Marigold & Kashmiri Rose) */}
-      <PetalCanvas
-        active={true}
-        density="normal"
+      {/* The Envelope Layer (Full Screen overlay, unmounts itself when opened) */}
+      <WaxSealEnvelope
+        isOpen={isEnvelopeOpen}
+        onOpen={() => setIsEnvelopeOpen(true)}
       />
 
-      {/* 3. Responsive Royal Navigation Bar */}
-      <NavigationBar
-        coupleMonogram={WEDDING_DATA.coupleMonogram}
-        onOpenRSVP={() => setIsRsvpOpen(true)}
-      />
-
-      {/* Main Content Choreography */}
-      <main className="relative z-20 pt-16 pb-28 md:pb-20">
+      {/* Main Content Choreography (Always renders underneath, ready when envelope fades) */}
+      <main className="relative z-20 pt-4 pb-28 md:pb-20 space-y-0 md:space-y-6">
         
-        {/* State A: Closed Envelope View (The Interactive Unboxing Ceremony) */}
-        {!isEnvelopeOpen ? (
-          <div className="min-h-[90vh] flex flex-col items-center justify-center py-12 px-4">
-            <WaxSealEnvelope
-              isOpen={false}
-              onOpen={() => setIsEnvelopeOpen(true)}
-              coupleMonogram={WEDDING_DATA.coupleMonogram}
-            />
-          </div>
-        ) : (
-          /* State B: Unveiled Royal Celebration Experience (Full-Bleed Sheer Sections) */
-          <div className="space-y-16 animate-fade-in">
-            
-            {/* Primary Invitation Letter & Countdown Timer */}
-            <InvitationHero
-              weddingData={WEDDING_DATA}
-              onOpenRSVP={() => setIsRsvpOpen(true)}
-              onReplayEnvelope={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                setIsEnvelopeOpen(false);
-              }}
-            />
+        {/* Primary Invitation Letter & Countdown Timer */}
+        <InvitationHero
+          weddingData={WEDDING_DATA}
+          onReplayEnvelope={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setIsEnvelopeOpen(false);
+          }}
+        />
 
-            {/* Sacred Shloka & Royal Couple Story */}
-            <CoupleStory
-              groom={WEDDING_DATA.groom}
-              bride={WEDDING_DATA.bride}
-              shloka={WEDDING_DATA.shloka}
-            />
+        {/* Sacred Shloka & Royal Couple Story */}
+        <CoupleIntro
+          groom={WEDDING_DATA.groom}
+          bride={WEDDING_DATA.bride}
+        />
+        
+        {/* Memories & Gallery */}
+        <GallerySection />
 
-            {/* Multi-Day Royal Itinerary & Attire Lookbook */}
-            <ItinerarySection
-              events={WEDDING_DATA.events}
-            />
+        {/* Multi-Day Royal Itinerary & Attire Lookbook */}
+        <ItinerarySection
+          events={WEDDING_DATA.events}
+        />
 
-            {/* Palace Concierge & Lake Pichola Travel Guide */}
-            <PalaceConcierge
-              venue={WEDDING_DATA.venue}
-            />
+        {/* Palace Concierge & Lake Pichola Travel Guide */}
+        <PalaceConcierge
+          weddingData={WEDDING_DATA}
+        />
 
-            {/* Full-Bleed Digital RSVP Callout Banner */}
-            <section className="max-w-5xl mx-auto px-4 my-20 text-center">
-              <div className="rounded-3xl bg-black/60 backdrop-blur-md p-10 sm:p-16 border border-[#D4AF37]/60 shadow-[0_25px_80px_rgba(0,0,0,0.9)] relative overflow-hidden">
-                <LordGanesh size={84} className="w-20 h-20 text-[#D4AF37] mx-auto mb-4 drop-shadow-[0_4px_16px_rgba(212,175,55,0.6)]" />
-                
-                <span className="text-xs sm:text-sm font-sans tracking-[0.3em] text-[#D4AF37] uppercase font-bold block mb-2">
-                  ॥ श्री गणेशाय नमः ॥
-                </span>
-
-                <h3 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black text-[#FFF1C5] tracking-wide gold-foil-text drop-shadow-md">
-                  Honour Us With Your Presence
-                </h3>
-
-                <p className="font-sans text-sm sm:text-base text-[#FCFAF6]/90 mt-4 max-w-2xl mx-auto leading-relaxed">
-                  Kindly confirm your attendance and ceremony preferences to assist our royal hospitality concierge at Lake Pichola.
-                </p>
-
-                <div className="mt-8">
-                  <button
-                    type="button"
-                    onClick={() => setIsRsvpOpen(true)}
-                    className="px-12 py-4 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#FFF1C5] to-[#AA8222] text-[#1A1615] font-serif text-sm sm:text-base font-bold uppercase tracking-widest shadow-[0_6px_30px_rgba(212,175,55,0.5)] hover:shadow-[0_8px_40px_rgba(212,175,55,0.7)] hover:scale-105 transition-all cursor-pointer inline-flex items-center gap-2.5"
-                  >
-                    <Heart className="w-5 h-5 fill-current text-[#801B31]" />
-                    <span>Confirm Royal RSVP</span>
-                  </button>
-                </div>
-              </div>
-            </section>
-
-            {/* Live Blessing Wall & Guestbook */}
-            <BlessingWall
-              blessings={blessings}
-              onAddBlessing={handleAddBlessing}
-              rsvps={rsvps}
-            />
-
-          </div>
-        )}
+        {/* Live Blessing Wall & Guestbook */}
+        <BlessingWall
+          blessings={blessings}
+          onAddBlessing={handleAddBlessing}
+        />
 
       </main>
 
-      {/* Royal Footer */}
-      <footer className="relative z-20 border-t border-[#D4AF37]/30 bg-black/85 backdrop-blur-md py-14 px-4 text-center">
-        <div className="max-w-3xl mx-auto space-y-4">
-          <LordGanesh size={54} className="w-14 h-14 text-[#D4AF37] mx-auto mb-2" />
+      {/* Grand Footer */}
+      <footer className="relative z-20 bg-[#1A1615] text-[#FAFAFA] py-24 px-4 text-center mt-32">
+        <div className="max-w-4xl mx-auto flex flex-col items-center">
+          
+          <span className="font-serif italic text-2xl text-[#D4AF37] mb-8 font-medium">
+            With Love & Blessings
+          </span>
 
-          <p className="font-serif text-lg text-[#FFF1C5] font-bold tracking-widest">
+          <h2 className="font-serif text-5xl md:text-7xl font-light mb-6 tracking-wide">
             Aarav & Ananya
-          </p>
+          </h2>
 
-          <p className="font-serif text-xs sm:text-sm text-[#D4AF37] italic max-w-lg mx-auto leading-relaxed">
-            &ldquo;मङ्गलं भगवान् विष्णुर्मङ्गलं गरुडध्वजः।<br />
-            मङ्गलं पुण्डरीकाक्षो मङ्गलायतनो हरिः॥&rdquo;
-          </p>
+          <div className="w-24 h-[1px] bg-[#D4AF37]/40 mb-12" />
 
-          <p className="font-sans text-xs text-[#FCFAF6]/60 tracking-wider pt-3">
-            November 26–28, 2026 • The Historic Palaces of Lake Pichola, Udaipur, Rajasthan
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-32 text-sm md:text-base font-sans tracking-widest uppercase text-[#FAFAFA]/70">
+            <div className="flex flex-col space-y-2">
+              <span className="text-[#D4AF37] font-serif italic normal-case text-xl mb-3">The Groom's Family</span>
+              <span>Shri Vikramaditya Singh</span>
+              <span>Shrimati Gayatri Devi</span>
+              <span>House of Mewar</span>
+            </div>
+            <div className="flex flex-col space-y-2">
+              <span className="text-[#D4AF37] font-serif italic normal-case text-xl mb-3">The Bride's Family</span>
+              <span>Shri Digvijay Singh Rathore</span>
+              <span>Shrimati Radhika Devi</span>
+              <span>House of Jaipur</span>
+            </div>
+          </div>
+
+          <div className="mt-20 flex flex-col items-center opacity-50">
+            <p className="font-sans text-[10px] tracking-[0.4em] uppercase">
+              November 26-28, 2026 • Udaipur, Rajasthan
+            </p>
+          </div>
         </div>
-      </footer>
-
-      {/* Interactive RSVP Modal Dialog */}
-      <RSVPModal
-        isOpen={isRsvpOpen}
-        onClose={() => setIsRsvpOpen(false)}
-        events={WEDDING_DATA.events}
-        onSubmitted={handleRsvpSubmit}
-      />
-
-    </div>
-  );
-}
+      </footer></div>);}

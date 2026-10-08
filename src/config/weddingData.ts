@@ -10,7 +10,7 @@ export const WEDDING_DATA: WeddingConfig = {
   groom: {
     name: 'Aarav',
     title: 'Maharaj Kunwar Aarav',
-    royalLineage: 'House of Sisodia & Royal House of Mewar',
+    royalLineage: 'House of Sisodia & House of Mewar',
     parents: 'Son of Shri Vikramaditya Singh & Shrimati Gayatri Devi',
     about: 'An alumnus of Oxford and classical horseman, Aarav honors centuries of timeless Mewar heritage with a contemporary global vision for art and sustainable preservation.',
     photoUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80'
@@ -18,13 +18,13 @@ export const WEDDING_DATA: WeddingConfig = {
   bride: {
     name: 'Ananya',
     title: 'Rajkumari Ananya',
-    royalLineage: 'Royal House of Jaipur & Kachhwaha Dynasty',
+    royalLineage: 'House of Jaipur & Kachhwaha Dynasty',
     parents: 'Daughter of Shri Digvijay Singh Rathore & Shrimati Radhika Devi',
     about: 'An accomplished classical Odissi dancer and architectural conservationist, Ananya weaves grace, intellect, and profound reverence for imperial Rajasthani craftsmanship.',
     photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80'
   },
-  mainWeddingDate: '2026-11-28T16:30:00+05:30', // Big Day: Royal Pheras at sunset
-  invitationNote: 'With the divine blessings of our beloved ancestors and the Almighty, the royal families of Mewar and Jaipur cordially invite you to celebrate the joyous wedding festivities of our children.',
+  mainWeddingDate: '2026-11-28T16:30:00+05:30', // Big Day: Pheras at sunset
+  invitationNote: 'With the grace of the Almighty and the blessings of our ancestors, we warmly invite you to share in our joy and celebrate the beautiful wedding festivities of our children.',
   
   // Custom video background provided by user
   backgroundVideoUrl: '/video/14249219_1920_1080_100fps.mp4',
@@ -60,7 +60,7 @@ export const WEDDING_DATA: WeddingConfig = {
     },
     {
       id: 'mehendi',
-      title: 'Royal Mehendi Bazaar',
+      title: 'Mehendi Bazaar',
       subtitle: 'Intricate Henna Artistry & Folk Festivities',
       dayNumber: 1,
       date: '2026-11-26',
@@ -68,8 +68,8 @@ export const WEDDING_DATA: WeddingConfig = {
       time: '4:30 PM – 8:30 PM',
       venue: 'Manek Chowk Courtyard',
       hall: 'Imperial Lakeside Garden',
-      description: 'Master henna artisans craft intricate Rajasthani bridal motifs under illuminated velvet shamianas, accompanied by puppet theatrics and spiced royal chai.',
-      ritualSignificance: 'Symbolizing deep devotion, prosperity, and the blossoming bond between the two royal houses.',
+      description: 'Master henna artisans craft intricate Rajasthani bridal motifs under illuminated velvet shamianas, accompanied by puppet theatrics and spiced chai.',
+      ritualSignificance: 'Symbolizing deep devotion, prosperity, and the blossoming bond between the two families.',
       dressCode: {
         title: 'Mint, Emerald & Lime Festive',
         subtitle: 'Playful Festive Pastels',
@@ -99,7 +99,7 @@ export const WEDDING_DATA: WeddingConfig = {
       ritualSignificance: 'A night of unbound joy where two lineages celebrate unison through the sacred ecstasy of music and celebration.',
       dressCode: {
         title: 'Midnight Emerald & Velvet Glamour',
-        subtitle: 'Indo-Western Glitz & Regal Royalty',
+        subtitle: 'Indo-Western Glitz & Elegant Attire',
         colors: [
           { name: 'Imperial Emerald', hex: '#0E3B2F' },
           { name: 'Deep Midnight Navy', hex: '#1E1B4B' },
@@ -115,26 +115,26 @@ export const WEDDING_DATA: WeddingConfig = {
     {
       id: 'pheras',
       title: 'Shahi Baraat & Vedic Pheras',
-      subtitle: 'The Royal Matrimonial Union at Sunset',
+      subtitle: 'The Matrimonial Union at Sunset',
       dayNumber: 3,
       date: '2026-11-28',
       formattedDate: 'Saturday, November 28, 2026',
       time: '4:00 PM – 8:00 PM',
       venue: 'Jagmandir Island Palace Mandap',
       hall: 'The Lake Pavilion Overlooking Pichola',
-      description: 'The ceremonial arrival of the Groom with royal elephant regalia and dhol procession across the water, followed by the sacred Saat Phere around the Agni at sunset.',
+      description: 'The ceremonial arrival of the Groom with elephant regalia and dhol procession across the water, followed by the sacred Saat Phere around the Agni at sunset.',
       ritualSignificance: 'The eternal Vedic vows binding soul to soul across seven lifetimes in presence of the Agni and cosmic witnesses.',
       dressCode: {
-        title: 'Imperial Ivory & Traditional Royal Pink',
+        title: 'Imperial Ivory & Traditional Pink',
         subtitle: 'Strict Traditional Regal Attire',
         colors: [
-          { name: 'Royal Sindoor Red', hex: '#801B31' },
+          { name: 'Sindoor Red', hex: '#801B31' },
           { name: 'Rose Quartz Pink', hex: '#F43F5E' },
           { name: 'Warm Ivory Silk', hex: '#FEF08A' },
           { name: 'Antique Gold', hex: '#D4AF37' }
         ],
         fabrics: ['Pure Banarasi Katan Silk', 'Zardozi Handwoven Silk', 'Chikankari'],
-        suggestions: 'Traditional bridal red and rani pink silks with polki jewelry; Achkan sherwanis with royal Safa turbans.'
+        suggestions: 'Traditional bridal red and rani pink silks with polki jewelry; Achkan sherwanis with Safa turbans.'
       },
       mapCoordinates: { lat: 24.5678, lng: 73.6781 },
       googleMapsUrl: 'https://maps.google.com/?q=Jagmandir+Island+Palace+Lake+Pichola+Udaipur'
@@ -148,8 +148,8 @@ export const WEDDING_DATA: WeddingConfig = {
       formattedDate: 'Saturday, November 28, 2026',
       time: '8:30 PM – Midnight',
       venue: 'The Grand Durbar Hall, Fateh Prakash Palace',
-      hall: 'The Royal Crystal Dining Pavilion',
-      description: 'An imperial banquet featuring 56 royal Rajput thali specialties, international gourmet pairings, symphonic string quartets, and heartfelt toasts to the newlyweds.',
+      hall: 'The Crystal Dining Pavilion',
+      description: 'An imperial banquet featuring 56 Rajput thali specialties, international gourmet pairings, symphonic string quartets, and heartfelt toasts to the newlyweds.',
       ritualSignificance: 'The formal presentation of the newly wedded couple to society and global dignitaries.',
       dressCode: {
         title: 'Formal Black Tie or Regal Gold Formals',
@@ -161,7 +161,7 @@ export const WEDDING_DATA: WeddingConfig = {
           { name: 'Deep Ruby', hex: '#881337' }
         ],
         fabrics: ['Italian Super-150s Wool', 'Raw Tussar Silk', 'Organza & Crystal'],
-        suggestions: 'Tuxedos, structured evening gowns, or opulent royal sherwanis with pocket squares and safas.'
+        suggestions: 'Tuxedos, structured evening gowns, or opulent sherwanis with pocket squares and safas.'
       },
       mapCoordinates: { lat: 24.5752, lng: 73.6826 },
       googleMapsUrl: 'https://maps.google.com/?q=Fateh+Prakash+Palace+The+Durbar+Hall+Udaipur'
@@ -175,7 +175,7 @@ export const WEDDING_DATA: WeddingConfig = {
     state: 'Rajasthan',
     country: 'India',
     address: 'The City Palace Complex, Lake Pichola, Udaipur, Rajasthan 313001',
-    arrivalGuide: 'All guests attending island ceremonies will board private ceremonial royal solar boats at the Bansi Ghat Jetty located at City Palace. Boat shuttles operate continuously every 15 minutes.',
+    arrivalGuide: 'All guests attending island ceremonies will board private ceremonial solar boats at the Bansi Ghat Jetty located at City Palace. Boat shuttles operate continuously every 15 minutes.',
     airport: {
       name: 'Maharana Pratap Airport',
       code: 'UDR',
@@ -183,7 +183,7 @@ export const WEDDING_DATA: WeddingConfig = {
       travelTime: '35–45 minutes by chauffeured palace concierge car'
     },
     boatJetty: {
-      name: 'Bansi Ghat Private Royal Jetty',
+      name: 'Bansi Ghat Private Jetty',
       details: 'Valet parking and private concierge escort directly onto lake catamaran yachts.'
     },
     weatherAdvice: 'November in Udaipur features pleasant sunny afternoons (26°C / 78°F) and crisp, cool lakeside evenings (14°C / 57°F). A light pashmina or tailored shawl is recommended for night events.',

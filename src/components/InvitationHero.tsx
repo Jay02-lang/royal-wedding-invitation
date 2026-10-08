@@ -1,166 +1,114 @@
-import React from 'react';
-import { WeddingConfig } from '../types/wedding';
-import { useCountdown } from '../hooks/useCountdown';
-import { generateGoogleCalendarUrl } from '../utils/calendar';
-import { LordGanesh } from './LordGanesh';
-import { Calendar, Heart, MapPin, RotateCcw, Sparkles } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { WeddingConfig } from "../types/wedding";
+import { OrnamentDivider } from "./OrnamentDivider";
 
 export interface InvitationHeroProps {
   weddingData: WeddingConfig;
-  onOpenRSVP: () => void;
   onReplayEnvelope?: () => void;
 }
 
 export const InvitationHero: React.FC<InvitationHeroProps> = ({
   weddingData,
-  onOpenRSVP,
-  onReplayEnvelope
+  onReplayEnvelope,
 }) => {
-  const countdown = useCountdown(weddingData.mainWeddingDate);
-  const pherasEvent = weddingData.events.find(e => e.id === 'pheras') || weddingData.events[0];
-
   return (
-    <section className="relative min-h-[95vh] w-full flex flex-col items-center justify-center px-4 py-16 md:py-24 text-center select-none">
-      
-      {/* Full-Screen Semi-Transparent Glass Frame (Letting Background Video & Petals Show Through) */}
-      <div className="relative w-full max-w-6xl mx-auto rounded-3xl bg-black/40 backdrop-blur-md border border-[#D4AF37]/50 p-6 sm:p-12 md:p-16 shadow-[0_25px_80px_rgba(0,0,0,0.85)]">
-        
-        {/* Ornate Gold Outer Filigree Trim */}
-        <div className="absolute inset-2 sm:inset-4 rounded-2xl border border-dashed border-[#D4AF37]/40 pointer-events-none" />
-        
-        {/* Corner Accents */}
-        <div className="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-[#D4AF37] pointer-events-none" />
-        <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-[#D4AF37] pointer-events-none" />
-        <div className="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-[#D4AF37] pointer-events-none" />
-        <div className="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-[#D4AF37] pointer-events-none" />
+    <section className="relative min-h-[75dvh] w-full flex flex-col items-center justify-center px-4 pt-8 pb-4 text-center select-none overflow-hidden">
+      <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center z-10">
+        {/* Ganesha Art (Very Top) */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="mb-8 flex flex-col items-center"
+        >
+          <img
+            src="/ganesha-hero.png"
+            alt="Lord Ganesha"
+            className="w-40 sm:w-56 md:w-64 object-contain opacity-90 drop-shadow-md"
+          />
+        </motion.div>
 
-        {/* Sacred Lord Ganesha Emblem & Invocations */}
-        <div className="flex flex-col items-center mb-6">
-          <LordGanesh size={96} className="w-24 h-24 text-[#D4AF37] drop-shadow-[0_4px_16px_rgba(212,175,55,0.6)] mb-3" />
-          <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-[#F7E5A9] tracking-widest block drop-shadow-md">
-            ॥ श्री गणेशाय नमः ॥
-          </span>
-          <span className="text-xs md:text-sm font-sans tracking-[0.3em] text-[#D4AF37] uppercase font-bold mt-2">
-            By The Divine Grace Of God & Royal Ancestors
-          </span>
-        </div>
+        {/* TOP ORNAMENT DIVIDER */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+        >
+          <OrnamentDivider width={320} className="opacity-80" />
+        </motion.div>
 
-        {/* Grand Invitation Proclamation */}
-        <div className="max-w-4xl mx-auto my-6 space-y-4">
-          <p className="font-serif text-sm sm:text-base md:text-lg text-[#FCFAF6]/90 italic max-w-2xl mx-auto leading-relaxed">
+        {/* FAMILIES INVITATION */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 1 }}
+          className="w-full max-w-4xl mx-auto px-4 py-10 flex flex-col items-center"
+        >
+          <p className="font-serif text-sm sm:text-base md:text-lg text-[#1A1615] font-semibold leading-loose sm:leading-loose text-center tracking-[0.2em] uppercase drop-shadow-sm max-w-2xl">
             {weddingData.invitationNote}
           </p>
+        </motion.div>
 
-          {/* Enormous Royal Headings for Couple */}
-          <div className="py-6 sm:py-10">
-            <span className="text-xs sm:text-sm font-sans tracking-[0.3em] text-[#D4AF37] uppercase font-bold block mb-3">
-              Cordially Request The Honour Of Your Presence At The Marriage Of
+        {/* TO CELEBRATE */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 1 }}
+          className="flex flex-col items-center"
+        >
+          <span className="font-serif italic text-lg sm:text-2xl text-[#6B4C0A] mb-8 drop-shadow-sm font-medium">
+            To Witness The Eternal Union Of
+          </span>
+        </motion.div>
+
+        {/* COUPLE NAMES */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 1.2 }}
+          className="mb-14 flex flex-col items-center relative"
+        >
+          <h1 className="font-serif text-6xl sm:text-8xl md:text-[9rem] font-medium text-[#1A1615] tracking-tight leading-none drop-shadow-xl">
+            {weddingData.groom.name.split(" ")[0]}
+            <span className="block text-4xl sm:text-6xl md:text-7xl text-[#6B4C0A] font-light my-4 sm:my-6">
+              &
             </span>
+            {weddingData.bride.name.split(" ")[0]}
+          </h1>
+        </motion.div>
 
-            <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-[#FFF1C5] tracking-wide leading-none drop-shadow-[0_8px_30px_rgba(0,0,0,0.9)] gold-foil-text">
-              {weddingData.groom.name}
-            </h1>
+        {/* BOTTOM ORNAMENT DIVIDER */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 1 }}
+          className="mb-10"
+        >
+          <OrnamentDivider width={320} className="opacity-80" />
+        </motion.div>
 
-            <div className="flex items-center justify-center gap-4 my-2 sm:my-4">
-              <div className="h-px w-20 sm:w-32 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
-              <span className="font-serif text-2xl sm:text-4xl md:text-5xl text-[#D4AF37] font-light">
-                &
-              </span>
-              <div className="h-px w-20 sm:w-32 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
-            </div>
-
-            <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-[#FFF1C5] tracking-wide leading-none drop-shadow-[0_8px_30px_rgba(0,0,0,0.9)] gold-foil-text">
-              {weddingData.bride.name}
-            </h1>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-sm md:text-base text-[#F7E5A9] font-serif">
-            <span className="font-bold tracking-wider">The Historic Palaces of Lake Pichola</span>
-            <span className="hidden sm:inline text-[#D4AF37]">•</span>
-            <span>Udaipur, Rajasthan</span>
-          </div>
-        </div>
-
-        {/* Auspicious Date Callout */}
-        <div className="inline-flex items-center gap-2.5 px-8 py-3 rounded-full bg-[#801B31]/80 border-2 border-[#D4AF37] my-6 text-[#FFF1C5] shadow-lg">
-          <Calendar className="w-5 h-5 text-[#D4AF37]" />
-          <span className="font-serif text-sm sm:text-base md:text-lg font-bold tracking-widest uppercase">
-            November 26 – 28, 2026
+        {/* DATE & VENUE (CLEAN) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="flex flex-col items-center px-8 w-full"
+        >
+          <span className="font-sans uppercase tracking-[0.4em] sm:tracking-[0.5em] text-[#1A1615] text-sm sm:text-base font-bold drop-shadow-sm mb-4">
+            November 26 — 28, 2026
           </span>
-        </div>
-
-        {/* Countdown Timer with Gilded Frosted Frames */}
-        <div className="my-8 pt-6 border-t border-[#D4AF37]/30 max-w-2xl mx-auto">
-          <span className="text-xs sm:text-sm font-sans uppercase tracking-[0.25em] text-[#D4AF37] font-bold block mb-4">
-            Countdown To The Auspicious Saat Phere
+          <span className="font-serif italic text-xl sm:text-3xl text-[#6B4C0A] drop-shadow-sm font-semibold tracking-wide">
+            {weddingData.events[0].venue}
           </span>
 
-          <div className="grid grid-cols-4 gap-3 sm:gap-6">
-            {[
-              { label: 'Days', value: countdown.days },
-              { label: 'Hours', value: countdown.hours },
-              { label: 'Minutes', value: countdown.minutes },
-              { label: 'Seconds', value: countdown.seconds }
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-black/60 backdrop-blur-md border border-[#D4AF37]/60 rounded-2xl p-3 sm:p-5 shadow-lg flex flex-col items-center"
-              >
-                <span className="font-serif text-2xl sm:text-4xl md:text-5xl font-black text-[#FFF1C5] drop-shadow-md">
-                  {String(item.value).padStart(2, '0')}
-                </span>
-                <span className="text-[10px] sm:text-xs font-sans uppercase tracking-widest text-[#D4AF37] font-semibold mt-1">
-                  {item.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Primary Interactive Actions */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
-            type="button"
-            onClick={onOpenRSVP}
-            className="w-full sm:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#FFF1C5] to-[#AA8222] text-[#1A1615] font-serif text-sm md:text-base font-bold tracking-widest uppercase shadow-[0_6px_30px_rgba(212,175,55,0.5)] hover:shadow-[0_8px_40px_rgba(212,175,55,0.7)] hover:scale-105 transition-all cursor-pointer flex items-center justify-center gap-2"
+            onClick={onReplayEnvelope}
+            className="mt-16 text-xs sm:text-sm font-sans tracking-widest uppercase text-[#6B4C0A] hover:text-[#1A1615] transition-colors flex items-center gap-2 opacity-80 hover:opacity-100 font-bold border-b border-[#6B4C0A]/30 pb-1"
           >
-            <Heart className="w-4 h-4 fill-current text-[#801B31]" />
-            <span>RSVP Your Presence</span>
+            Replay Envelope
           </button>
-
-          <a
-            href={generateGoogleCalendarUrl(pherasEvent)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-black/60 border-2 border-[#D4AF37] text-[#F7E5A9] font-serif text-sm font-bold tracking-widest uppercase hover:bg-[#D4AF37]/20 transition-all cursor-pointer flex items-center justify-center gap-2 backdrop-blur-md"
-          >
-            <Calendar className="w-4 h-4 text-[#D4AF37]" />
-            <span>Add To Calendar</span>
-          </a>
-        </div>
-
-        {/* Quick Links */}
-        <div className="mt-8 flex items-center justify-center gap-6 text-xs text-[#D4AF37]">
-          <a
-            href="#venue"
-            className="hover:text-white underline decoration-[#D4AF37] transition-colors inline-flex items-center gap-1.5"
-          >
-            <MapPin className="w-4 h-4" />
-            <span>Palace Concierge</span>
-          </a>
-
-          {onReplayEnvelope && (
-            <button
-              type="button"
-              onClick={onReplayEnvelope}
-              className="hover:text-white underline decoration-[#D4AF37] transition-colors inline-flex items-center gap-1.5 cursor-pointer"
-            >
-              <RotateCcw className="w-4 h-4" />
-              <span>Re-Seal Envelope</span>
-            </button>
-          )}
-        </div>
-
+        </motion.div>
       </div>
     </section>
   );

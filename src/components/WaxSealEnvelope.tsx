@@ -1,188 +1,209 @@
-import React, { useState } from 'react';
-import confetti from 'canvas-confetti';
-import { LordGanesh } from './LordGanesh';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { GaneshaLogo } from "./GaneshaLogo";
+import { CodeFloralPattern } from "./CodeFloralPattern";
+import { WildflowerBirds } from "./WildflowerBirds";
+import { FinalFlapArt } from "./FinalFlapArt";
+import { FlapFloralArt } from "./FlapFloralArt";
 
-export interface WaxSealEnvelopeProps {
+
+interface WaxSealEnvelopeProps {
   isOpen: boolean;
   onOpen: () => void;
-  coupleMonogram?: string;
-}
-
-export function getEnvelopeStateClasses(isOpen: boolean) {
-  return {
-    flapRotation: isOpen ? 'rotateX(180deg)' : 'rotateX(0deg)',
-    sealVisibility: !isOpen,
-    cardTranslateY: isOpen ? '-translate-y-44 md:-translate-y-64' : 'translate-y-0',
-  };
 }
 
 export const WaxSealEnvelope: React.FC<WaxSealEnvelopeProps> = ({
   isOpen,
   onOpen,
-  coupleMonogram = 'A & A'
 }) => {
+  const [internalOpen, setInternalOpen] = useState(isOpen);
+  const [isFullyUnmounted, setIsFullyUnmounted] = useState(false);
   const [isBreaking, setIsBreaking] = useState(false);
-  const stateClasses = getEnvelopeStateClasses(isOpen);
+
+  React.useEffect(() => {
+    if (!isOpen) {
+      setInternalOpen(false);
+      setIsFullyUnmounted(false);
+      setIsBreaking(false);
+    }
+  }, [isOpen]);
 
   const handleSealClick = () => {
-    if (isOpen) return;
-
-    setIsBreaking(true);
-
-    // Trigger celebratory gold and rose petal burst
-    confetti({
-      particleCount: 65,
-      spread: 80,
-      origin: { y: 0.6 },
-      colors: ['#D4AF37', '#801B31', '#F59E0B', '#FFF1C5'],
-      shapes: ['circle'],
-      scalar: 1.2
-    });
-
-    setTimeout(() => {
-      onOpen();
-      setIsBreaking(false);
-    }, 700);
+    if (internalOpen) return;
+    setInternalOpen(true);
+    onOpen();
+    setTimeout(() => setIsFullyUnmounted(true), 1200); // Wait for flap animations to finish before unmounting
   };
 
   return (
-    <div className="relative w-full max-w-2xl mx-auto py-12 px-4 flex flex-col items-center select-none text-center animate-fade-in">
-      
-      {/* Sacred Lord Ganesha Blessing Header */}
-      <div className="mb-8 flex flex-col items-center">
-        <LordGanesh size={80} className="w-20 h-20 text-[#D4AF37] mb-2 drop-shadow-[0_4px_12px_rgba(212,175,55,0.4)]" />
-        <span className="font-serif text-lg md:text-xl font-bold text-[#F7E5A9] tracking-widest block">
-          ॥ श्री गणेशाय नमः ॥
-        </span>
-        <h2 className="font-serif text-2xl md:text-4xl text-[#FCFAF6] font-bold mt-2 tracking-wide uppercase">
-          The Royal Wedding Invitation
-        </h2>
-        <p className="text-xs md:text-sm text-[#F7E5A9]/80 font-sans tracking-widest uppercase mt-1">
-          Aarav & Ananya • Lake Pichola, Udaipur
-        </p>
-      </div>
-
-      {/* 3D Envelope Container with Real Perspective */}
-      <div
-        className="relative w-full aspect-[16/11] max-w-[480px] rounded-2xl bg-[#4A0E1C] shadow-[0_30px_80px_rgba(0,0,0,0.9)] border-2 border-[#D4AF37]/50 p-1"
-        style={{ perspective: '1200px' }}
-      >
-        {/* Exterior Envelope Body */}
-        <div className="relative w-full h-full rounded-xl overflow-hidden bg-gradient-to-br from-[#5D1022] via-[#4A0E1C] to-[#2D060F] shadow-inner">
-          
-          {/* Ornate Gold Filigree Corner Ornaments */}
-          <div className="absolute top-2 left-2 w-10 h-10 border-t-2 border-l-2 border-[#D4AF37]/70 pointer-events-none" />
-          <div className="absolute top-2 right-2 w-10 h-10 border-t-2 border-r-2 border-[#D4AF37]/70 pointer-events-none" />
-          <div className="absolute bottom-2 left-2 w-10 h-10 border-b-2 border-l-2 border-[#D4AF37]/70 pointer-events-none" />
-          <div className="absolute bottom-2 right-2 w-10 h-10 border-b-2 border-r-2 border-[#D4AF37]/70 pointer-events-none" />
-
-          {/* Golden Paisley Foil Lattice Background */}
-          <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]" />
-
-          {/* Invitation Card Inside (Slides up when opened) */}
-          <div
-            className={`absolute inset-x-4 top-4 bottom-4 bg-[#FCFAF6] rounded-xl shadow-2xl p-6 flex flex-col items-center justify-center text-center transition-all duration-1000 ease-out border-2 border-[#D4AF37]/60 ${stateClasses.cardTranslateY}`}
-            style={{ zIndex: isOpen ? 30 : 5 }}
-          >
-            <LordGanesh size={36} className="w-9 h-9 text-[#801B31] mb-1" />
-            <span className="font-serif text-[11px] font-bold text-[#801B31] tracking-widest block">॥ श्री गणेशाय नमः ॥</span>
-            <p className="text-[10px] uppercase tracking-widest text-[#9A7B38] font-bold mt-1">Royal Wedding Celebration</p>
-            <h4 className="font-serif text-2xl text-[#1A1615] font-black mt-1">Aarav & Ananya</h4>
-            <p className="text-xs text-[#4A0E1C] mt-1 font-sans italic">Lake Pichola, Udaipur</p>
+    <AnimatePresence>
+      {!isFullyUnmounted && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-[#1A1615]"
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {/* Envelope Backing (Dark behind flaps, flashes to pure white on open) */}
+          <div className="absolute inset-0 bg-[#170206]">
+            {/* Blinding White Flash */}
+            <motion.div
+              className="absolute inset-0 bg-white z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: internalOpen ? 1 : 0 }}
+              transition={{ duration: 0.6, ease: "easeIn" }}
+            />
           </div>
 
           {/* Side Flaps */}
-          <div
-            className="absolute inset-0 pointer-events-none z-10"
+          {/* Left Flap */}
+          <motion.div
+            className="absolute inset-0 z-20 pointer-events-none overflow-hidden origin-left"
+            initial={{ rotateY: 0 }}
+            animate={{ rotateY: internalOpen ? -180 : 0 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              clipPath: 'polygon(0% 0%, 50% 50%, 0% 100%)',
-              background: 'linear-gradient(135deg, #4A0E1C 0%, #380813 100%)',
-              borderRight: '1px solid rgba(212,175,55,0.3)'
+              clipPath: "polygon(0% 0%, 50% 50%, 0% 100%)",
+              background: "linear-gradient(135deg, #2A040D 0%, #170206 100%)",
+              backfaceVisibility: "hidden",
+              boxShadow: internalOpen ? "none" : "inset -10px 0 30px rgba(0,0,0,0.5)"
             }}
-          />
-          <div
-            className="absolute inset-0 pointer-events-none z-10"
+          >
+            {/* Single Solid Gold Edge */}
+            <svg className="absolute inset-0 w-full h-full opacity-60" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M 0 0 L 50 50 L 0 100" vectorEffect="non-scaling-stroke" stroke="#D4AF37" strokeWidth="2.5" fill="none" />
+            </svg>
+            {/* FULL COVER Seamless Delicate Art */}
+            <div className="absolute inset-0 opacity-[0.20] text-[#D4AF37] mix-blend-screen pointer-events-none overflow-hidden">
+              <FinalFlapArt className="absolute top-0 left-0 w-full h-full object-cover" />
+            </div>
+          </motion.div>
+
+          {/* Right Flap */}
+          <motion.div
+            className="absolute inset-0 z-20 pointer-events-none overflow-hidden origin-right"
+            initial={{ rotateY: 0 }}
+            animate={{ rotateY: internalOpen ? 180 : 0 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              clipPath: 'polygon(100% 0%, 50% 50%, 100% 100%)',
-              background: 'linear-gradient(225deg, #4A0E1C 0%, #380813 100%)',
-              borderLeft: '1px solid rgba(212,175,55,0.3)'
+              clipPath: "polygon(100% 0%, 50% 50%, 100% 100%)",
+              background: "linear-gradient(225deg, #2A040D 0%, #170206 100%)",
+              backfaceVisibility: "hidden",
+              boxShadow: internalOpen ? "none" : "inset 10px 0 30px rgba(0,0,0,0.5)"
             }}
-          />
+          >
+            {/* Single Solid Gold Edge */}
+            <svg className="absolute inset-0 w-full h-full opacity-60" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M 100 0 L 50 50 L 100 100" vectorEffect="non-scaling-stroke" stroke="#D4AF37" strokeWidth="2.5" fill="none" />
+            </svg>
+            {/* FULL COVER Seamless Delicate Art */}
+            <div className="absolute inset-0 opacity-[0.20] text-[#D4AF37] mix-blend-screen pointer-events-none overflow-hidden">
+               <FinalFlapArt className="absolute top-0 left-0 w-full h-full object-cover" />
+            </div>
+          </motion.div>
 
           {/* Bottom Flap */}
-          <div
-            className="absolute inset-0 pointer-events-none z-15"
+          <motion.div
+            className="absolute inset-0 z-20 pointer-events-none overflow-hidden origin-bottom"
+            initial={{ rotateX: 0 }}
+            animate={{ rotateX: internalOpen ? -180 : 0 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              clipPath: 'polygon(0% 100%, 50% 45%, 100% 100%)',
-              background: 'linear-gradient(0deg, #380813 0%, #4A0E1C 100%)',
-              boxShadow: '0 -4px 15px rgba(0,0,0,0.5)',
-              borderTop: '1px solid rgba(212,175,55,0.4)'
+              clipPath: "polygon(0% 100%, 50% 50%, 100% 100%)",
+              background: "linear-gradient(0deg, #170206 0%, #2A040D 100%)",
+              backfaceVisibility: "hidden",
+              boxShadow: internalOpen ? "none" : "0 -20px 50px rgba(0,0,0,0.9), inset 0 10px 30px rgba(0,0,0,0.5)"
             }}
-          />
+          >
+            {/* Single Solid Gold Edge */}
+            <svg className="absolute inset-0 w-full h-full opacity-60" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M 0 100 L 50 50 L 100 100" vectorEffect="non-scaling-stroke" stroke="#D4AF37" strokeWidth="2.5" fill="none" />
+            </svg>
+            {/* FULL COVER Seamless Delicate Art */}
+            <div className="absolute inset-0 opacity-[0.20] text-[#D4AF37] mix-blend-screen pointer-events-none overflow-hidden">
+               <FinalFlapArt className="absolute top-0 left-0 w-full h-full object-cover" />
+            </div>
+          </motion.div>
 
-          {/* Top Flap */}
-          <div
-            className="absolute inset-x-0 top-0 h-full origin-top transition-transform duration-1000 ease-in-out z-20"
+          {/* Top Flap (Opens massively) */}
+          <motion.div
+            className="absolute inset-0 z-30 origin-top overflow-hidden"
+            initial={{ rotateX: 0 }}
+            animate={{ rotateX: internalOpen ? 180 : 0 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              transform: stateClasses.flapRotation,
-              transformStyle: 'preserve-3d',
-              clipPath: 'polygon(0% 0%, 100% 0%, 50% 55%)',
-              background: 'linear-gradient(180deg, #5D1022 0%, #3B0914 100%)',
-              borderBottom: '1px solid rgba(212,175,55,0.5)',
-              boxShadow: isOpen ? 'none' : '0 8px 25px rgba(0,0,0,0.7)'
+              clipPath: "polygon(0% 0%, 100% 0%, 50% 55%)",
+              background: "linear-gradient(180deg, #380813 0%, #1A0308 100%)",
+              backfaceVisibility: "hidden",
+              boxShadow: internalOpen ? "none" : "0 25px 60px rgba(0,0,0,0.9)",
             }}
-          />
+          >
+            {/* Top Flap Solid Gold Edge */}
+            <svg className="absolute inset-0 w-full h-full opacity-70 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M 0 0 L 50 55 L 100 0" vectorEffect="non-scaling-stroke" stroke="#D4AF37" strokeWidth="2.5" fill="none" />
+            </svg>
+            {/* FULL COVER Seamless Delicate Art */}
+            <div className="absolute inset-0 opacity-[0.20] text-[#D4AF37] mix-blend-screen pointer-events-none overflow-hidden">
+               <FinalFlapArt className="absolute top-0 left-0 w-full h-full object-cover" />
+            </div>
+            {/* Top flap inner shadow for depth */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+          </motion.div>
 
-          {/* Hyper-Realistic 3D Embossed Molten Wax Seal */}
-          {stateClasses.sealVisibility && (
+          {/* 3D Wax Seal in the Exact Center */}
+          <motion.div
+            className="absolute top-[52%] md:top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-40"
+            initial={{ scale: 1, opacity: 1 }}
+            animate={
+              isBreaking
+                ? { scale: 1.1, opacity: 0, rotate: 10 }
+                : internalOpen
+                  ? { scale: 1.3, opacity: 0 }
+                  : { scale: 1, opacity: 1 }
+            }
+            transition={{ duration: 0.4 }}
+          >
             <button
               type="button"
               onClick={handleSealClick}
-              disabled={isBreaking}
-              aria-label="Break wax seal and open invitation"
-              className={`absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 group cursor-pointer focus:outline-none transition-transform duration-300 ${
-                isBreaking ? 'scale-125 opacity-70 rotate-6' : 'hover:scale-105 active:scale-95'
-              }`}
+              disabled={internalOpen}
+              className="group cursor-pointer hover:scale-105 active:scale-95 transition-transform duration-300"
             >
-              <div className="relative w-24 h-24 md:w-28 md:h-28 flex items-center justify-center">
-                {/* Outer molten irregular contour */}
-                <div className="absolute inset-0 rounded-full bg-[#801B31] shadow-[0_12px_30px_rgba(0,0,0,0.85),inset_0_3px_5px_rgba(255,255,255,0.4),inset_0_-4px_8px_rgba(0,0,0,0.6)] border-2 border-[#9E1B32]" />
+              <div className="relative w-36 h-36 md:w-48 md:h-48 flex items-center justify-center">
                 
-                {/* Irregular molten wax drops along the rim */}
-                <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#801B31] shadow-inner" />
-                <div className="absolute -bottom-1 -left-1 w-6 h-6 rounded-full bg-[#720F22] shadow-inner" />
-                <div className="absolute bottom-2 -right-2 w-4 h-4 rounded-full bg-[#801B31]" />
-                <div className="absolute -bottom-2 right-4 w-5 h-5 rounded-full bg-[#5D1022]" />
+                {/* CLEAN, BRIGHT WAX BASE (No drips, bright colors) */}
+                <div 
+                  className="absolute inset-0 rounded-full bg-gradient-to-br from-[#E32636] via-[#B81525] to-[#801B31]"
+                  style={{ 
+                    boxShadow: "0px 15px 30px rgba(0,0,0,0.7), inset 0px 6px 12px rgba(255,255,255,0.4), inset 0px -8px 16px rgba(0,0,0,0.5)"
+                  }}
+                />
 
-                {/* Inner Debossed Seal Bed */}
-                <div className="relative w-18 h-18 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-[#9E1B32] via-[#751125] to-[#450714] shadow-[inset_0_4px_10px_rgba(0,0,0,0.7),0_2px_4px_rgba(255,255,255,0.2)] flex flex-col items-center justify-center border border-[#D4AF37]/60 p-2">
-                  <div className="absolute inset-1 rounded-full border border-dashed border-[#D4AF37]/60 pointer-events-none" />
-                  <span className="font-serif text-base md:text-lg font-black text-[#F7E5A9] tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
-                    {coupleMonogram}
-                  </span>
-                  <span className="text-[9px] text-[#D4AF37] tracking-wider mt-0.5">
-                    ✦ SHREE ✦
-                  </span>
+                {/* Glossy Highlights */}
+                <div className="absolute top-3 left-5 w-16 h-8 bg-white/30 rounded-full blur-md transform -rotate-45 pointer-events-none" />
+
+                {/* Debossed Stamped Center */}
+                <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full bg-gradient-to-br from-[#9E1B32] via-[#801B31] to-[#5C0D1A] shadow-[inset_0_6px_12px_rgba(0,0,0,0.8),0_2px_4px_rgba(255,255,255,0.4)] flex flex-col items-center justify-center border border-[#D4AF37]/70">
+                  <div className="absolute inset-2 rounded-full border-[2px] border-dashed border-[#D4AF37]/60 pointer-events-none" />
+                  
+                  {/* Bright Gold Ganesha Logo */}
+                  <GaneshaLogo className="w-14 h-14 md:w-20 md:h-20 text-[#FFD700] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-100" />
                 </div>
               </div>
             </button>
-          )}
-        </div>
-      </div>
+          </motion.div>
 
-      {/* Interactive Helper Prompt */}
-      {!isOpen && (
-        <div className="mt-10 text-center animate-bounce">
-          <button
-            type="button"
-            onClick={handleSealClick}
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#FFF1C5] to-[#AA8222] text-[#1A1615] font-serif text-sm md:text-base font-bold uppercase tracking-widest shadow-[0_6px_25px_rgba(212,175,55,0.5)] hover:shadow-[0_8px_35px_rgba(212,175,55,0.7)] hover:scale-105 transition-all cursor-pointer"
+          {/* Click to Open Helper Text */}
+          <motion.div
+            className="absolute bottom-16 left-1/2 -translate-x-1/2 z-40 pointer-events-none"
+            animate={{ opacity: internalOpen ? 0 : [0.4, 1, 0.4] }}
+            transition={{ duration: 3, repeat: Infinity }}
           >
-            <span>Touch Wax Seal To Open</span>
-            <span className="text-lg">⟶</span>
-          </button>
-        </div>
+            <p className="font-sans text-[11px] md:text-sm tracking-[0.4em] uppercase text-[#D4AF37] drop-shadow-lg whitespace-nowrap font-semibold">
+              Tap the seal to open
+            </p>
+          </motion.div>
+        </motion.div>
       )}
-    </div>
+    </AnimatePresence>
   );
 };

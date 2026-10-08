@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface LordGaneshProps {
   className?: string;
@@ -6,8 +6,8 @@ interface LordGaneshProps {
 }
 
 export const LordGanesh: React.FC<LordGaneshProps> = ({
-  className = 'w-16 h-16 text-[#D4AF37]',
-  size = 64
+  className = "w-16 h-16 text-[#D4AF37]",
+  size = 64,
 }) => {
   return (
     <svg
@@ -36,7 +36,15 @@ export const LordGanesh: React.FC<LordGaneshProps> = ({
       <circle cx="60" cy="60" r="56" fill="url(#auraGlow)" />
 
       {/* Ornate halo ring */}
-      <circle cx="60" cy="60" r="52" stroke="url(#ganeshGold)" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.6" />
+      <circle
+        cx="60"
+        cy="60"
+        r="52"
+        stroke="url(#ganeshGold)"
+        strokeWidth="1.5"
+        strokeDasharray="3 3"
+        opacity="0.6"
+      />
 
       {/* Mukut / Crown */}
       <path
@@ -46,7 +54,14 @@ export const LordGanesh: React.FC<LordGaneshProps> = ({
         strokeWidth="0.8"
       />
       <circle cx="60" cy="22" r="2.5" fill="#FFF1C5" />
-      <circle cx="60" cy="34" r="3.5" fill="#801B31" stroke="url(#ganeshGold)" strokeWidth="1" />
+      <circle
+        cx="60"
+        cy="34"
+        r="3.5"
+        fill="#801B31"
+        stroke="url(#ganeshGold)"
+        strokeWidth="1"
+      />
 
       {/* Tilak / Trishul on Forehead */}
       <path
@@ -109,7 +124,14 @@ export const LordGanesh: React.FC<LordGaneshProps> = ({
       />
 
       {/* Modak (Sweet) held near trunk */}
-      <circle cx="44" cy="88" r="3.5" fill="#F59E0B" stroke="url(#ganeshGold)" strokeWidth="1" />
+      <circle
+        cx="44"
+        cy="88"
+        r="3.5"
+        fill="#F59E0B"
+        stroke="url(#ganeshGold)"
+        strokeWidth="1"
+      />
       <circle cx="43" cy="87" r="1" fill="#FFF1C5" />
 
       {/* Right Tusk (Ekadanta - Complete) */}
@@ -129,8 +151,22 @@ export const LordGanesh: React.FC<LordGaneshProps> = ({
       />
 
       {/* Eyes */}
-      <ellipse cx="66" cy="56" rx="2" ry="1.2" fill="#1A1615" transform="rotate(-15 66 56)" />
-      <ellipse cx="54" cy="56" rx="2" ry="1.2" fill="#1A1615" transform="rotate(15 54 56)" />
+      <ellipse
+        cx="66"
+        cy="56"
+        rx="2"
+        ry="1.2"
+        fill="#1A1615"
+        transform="rotate(-15 66 56)"
+      />
+      <ellipse
+        cx="54"
+        cy="56"
+        rx="2"
+        ry="1.2"
+        fill="#1A1615"
+        transform="rotate(15 54 56)"
+      />
 
       {/* Sacred Om Symbol Footnote */}
       <circle cx="60" cy="110" r="1.5" fill="url(#ganeshGold)" />

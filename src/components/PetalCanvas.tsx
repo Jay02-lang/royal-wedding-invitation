@@ -1,20 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 import {
   createPetal,
   drawPetal,
   getMobileAdjustedPetalCount,
   PetalParticle,
-  updatePetalPosition
-} from '../utils/petalPhysics';
+  updatePetalPosition,
+} from "../utils/petalPhysics";
 
 interface PetalCanvasProps {
   active?: boolean;
-  density?: 'normal' | 'burst';
+  density?: "normal" | "burst";
 }
 
 export const PetalCanvas: React.FC<PetalCanvasProps> = ({
   active = true,
-  density = 'normal'
+  density = "normal",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -23,7 +23,7 @@ export const PetalCanvas: React.FC<PetalCanvasProps> = ({
 
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationFrameId: number;
@@ -40,15 +40,17 @@ export const PetalCanvas: React.FC<PetalCanvasProps> = ({
 
       const targetCount = getMobileAdjustedPetalCount(width, density);
       // Initialize or scale petal pool
-      petals = Array.from({ length: targetCount }, () => createPetal(width, height));
+      petals = Array.from({ length: targetCount }, () =>
+        createPetal(width, height),
+      );
       // Spread initial Y positions across whole screen so petals are already visible
-      petals.forEach(p => {
+      petals.forEach((p) => {
         p.y = Math.random() * height;
       });
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     const render = () => {
       const width = window.innerWidth;
@@ -56,7 +58,7 @@ export const PetalCanvas: React.FC<PetalCanvasProps> = ({
 
       ctx.clearRect(0, 0, width, height);
 
-      petals = petals.map(p => {
+      petals = petals.map((p) => {
         const updated = updatePetalPosition(p, width, height);
         drawPetal(ctx, updated);
         return updated;
@@ -69,7 +71,7 @@ export const PetalCanvas: React.FC<PetalCanvasProps> = ({
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, [active, density]);
 
