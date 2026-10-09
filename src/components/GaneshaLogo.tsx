@@ -10,11 +10,11 @@ export const GaneshaLogo: React.FC<GaneshaLogoProps> = ({
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
       {/* Outer Glow */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#ff4d4d]/40 to-[#ff9999]/20 blur-xl animate-pulse" />
+      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#b87333]/40 to-[#ffb380]/20 blur-xl animate-pulse" />
 
       {/* The Masked Image */}
       <div
-        className="relative z-10 w-full h-full drop-shadow-[0_0_10px_rgba(204,0,0,0.8)]"
+        className="relative z-10 w-full h-full drop-shadow-[0_0_12px_rgba(184,115,51,0.6)]"
         style={{
           WebkitMaskImage: `url(${import.meta.env.BASE_URL}ganesha-logo.png)`,
           WebkitMaskSize: "contain",
@@ -26,7 +26,7 @@ export const GaneshaLogo: React.FC<GaneshaLogoProps> = ({
           maskPosition: "center",
         }}
       >
-        <div className="w-full h-full bg-gradient-to-br from-[#ff9999] via-[#cc0000] to-[#660000]" />
+        <div className="w-full h-full bg-gradient-to-br from-[#e69f66] via-[#b87333] to-[#4a2b10]" />
       </div>
     </div>
   );
