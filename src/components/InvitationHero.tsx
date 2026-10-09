@@ -22,11 +22,27 @@ export const InvitationHero: React.FC<InvitationHeroProps> = ({
           transition={{ duration: 1.5, ease: "easeOut" }}
           className="mb-8 flex flex-col items-center"
         >
-          <img
-            src={`${import.meta.env.BASE_URL}ganesha-hero.png`}
-            alt="Lord Ganesha"
-            className="w-40 sm:w-56 md:w-64 object-contain opacity-90 drop-shadow-md"
-          />
+          <div className="relative flex items-center justify-center w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64">
+            {/* Outer Glow */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#b87333]/40 to-[#ffb380]/20 blur-xl animate-pulse" />
+
+            {/* The Masked Image */}
+            <div
+              className="relative z-10 w-full h-full drop-shadow-[0_0_12px_rgba(184,115,51,0.6)]"
+              style={{
+                WebkitMaskImage: `url(${import.meta.env.BASE_URL}ganesha-hero.png)`,
+                WebkitMaskSize: "contain",
+                WebkitMaskRepeat: "no-repeat",
+                WebkitMaskPosition: "center",
+                maskImage: `url(${import.meta.env.BASE_URL}ganesha-hero.png)`,
+                maskSize: "contain",
+                maskRepeat: "no-repeat",
+                maskPosition: "center",
+              }}
+            >
+              <div className="w-full h-full bg-gradient-to-br from-[#e69f66] via-[#b87333] to-[#4a2b10]" />
+            </div>
+          </div>
         </motion.div>
 
         {/* TOP ORNAMENT DIVIDER */}
