@@ -38,7 +38,7 @@ export const BlessingWall: React.FC<BlessingWallProps> = ({
   return (
     <section
       id="blessings"
-      className="relative w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] max-w-6xl mx-auto flex flex-col items-center justify-center px-4 pt-12 pb-24 md:pt-16 md:pb-32 overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[2px] sm:backdrop-blur-[12px] rounded-[2rem] border border-white/40 shadow-2xl"
+      className="relative w-full flex flex-col items-center justify-center px-4 pt-12 pb-24 md:pt-16 md:pb-32 overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[2px] sm:backdrop-blur-[12px] border-y border-white/40 shadow-2xl"
     >
       <div className="max-w-[800px] mx-auto w-full relative z-10 flex flex-col items-center">
         {/* Header */}

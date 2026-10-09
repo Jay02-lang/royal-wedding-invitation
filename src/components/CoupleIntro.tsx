@@ -10,7 +10,7 @@ export interface CoupleIntroProps {
 
 export const CoupleIntro: React.FC<CoupleIntroProps> = ({ groom, bride }) => {
   return (
-    <section className="relative w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] flex flex-col max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-10 md:pt-16 md:pb-20 overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[2px] sm:backdrop-blur-[12px] rounded-[2rem] border border-white/40 shadow-2xl">
+    <section className="relative w-full flex flex-col items-center mx-auto px-4 sm:px-6 pt-10 pb-10 md:pt-16 md:pb-20 overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[2px] sm:backdrop-blur-[12px] border-y border-white/40 shadow-2xl">
       
       <motion.div
         initial={{ opacity: 0, y: 40 }}

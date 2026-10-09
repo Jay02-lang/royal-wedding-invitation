@@ -15,7 +15,7 @@ export const PalaceConcierge: React.FC<PalaceConciergeProps> = ({
   return (
     <section
       id="venue"
-      className="relative w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] max-w-6xl mx-auto flex flex-col items-center px-4 pt-12 pb-8 md:pt-16 md:pb-12 overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[2px] sm:backdrop-blur-[12px] rounded-[2rem] border border-white/40 shadow-2xl"
+      className="relative w-full flex flex-col items-center px-4 pt-12 pb-8 md:pt-16 md:pb-12 overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[2px] sm:backdrop-blur-[12px] border-y border-white/40 shadow-2xl"
     >
       {" "}
       {/* Procedural Botanicals */}{" "}
