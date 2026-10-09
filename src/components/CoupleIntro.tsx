@@ -10,7 +10,7 @@ export interface CoupleIntroProps {
 
 export const CoupleIntro: React.FC<CoupleIntroProps> = ({ groom, bride }) => {
   return (
-    <section className="relative w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] flex flex-col max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-10 md:pt-16 md:pb-20 overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[12px] rounded-[2rem] border border-white/40 shadow-2xl">
+    <section className="relative w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] flex flex-col max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-10 md:pt-16 md:pb-20 overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[2px] sm:backdrop-blur-[12px] rounded-[2rem] border border-white/40 shadow-2xl">
       
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -27,9 +27,9 @@ export const CoupleIntro: React.FC<CoupleIntroProps> = ({ groom, bride }) => {
             <div className="absolute -inset-2 sm:-inset-3 rounded-t-full rounded-b-sm border-[1px] border-[#6B4C0A]/30 z-0 transition-transform duration-700 group-hover:scale-[1.02]" />
             
             {/* Image Container (Classic Arch) */}
-            <div className="w-32 h-44 sm:w-56 sm:h-72 md:w-64 md:h-[22rem] rounded-t-full rounded-b-none overflow-hidden relative z-10 bg-[#FAFAFA] shadow-lg">
-              <div className="absolute inset-0 bg-[#6B4C0A]/5 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-              <img src={groom.photoUrl} alt={groom.name} className="w-full h-full object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]" />
+            <div className="w-32 h-44 sm:w-56 sm:h-72 md:w-64 md:h-[22rem] rounded-t-full rounded-b-none overflow-hidden relative z-10 bg-[#FAFAFA] shadow-[0_0_20px_rgba(212,175,55,0.3)] border border-[#D4AF37]/30">
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#D4AF37]/40 via-transparent to-[#FBE18D]/40 mix-blend-overlay z-10 opacity-70 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              <img src={groom.photoUrl} alt={groom.name} className="w-full h-full object-cover sepia-[.35] contrast-[1.1] brightness-[1.05] group-hover:sepia-[.1] transition-all duration-700 group-hover:scale-[1.03]" />
             </div>
           </div>
           
@@ -67,9 +67,9 @@ export const CoupleIntro: React.FC<CoupleIntroProps> = ({ groom, bride }) => {
             <div className="absolute -inset-2 sm:-inset-3 rounded-t-full rounded-b-sm border-[1px] border-[#6B4C0A]/30 z-0 transition-transform duration-700 group-hover:scale-[1.02]" />
             
             {/* Image Container (Classic Arch) */}
-            <div className="w-32 h-44 sm:w-56 sm:h-72 md:w-64 md:h-[22rem] rounded-t-full rounded-b-none overflow-hidden relative z-10 bg-[#FAFAFA] shadow-lg">
-              <div className="absolute inset-0 bg-[#6B4C0A]/5 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-              <img src={bride.photoUrl} alt={bride.name} className="w-full h-full object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]" />
+            <div className="w-32 h-44 sm:w-56 sm:h-72 md:w-64 md:h-[22rem] rounded-t-full rounded-b-none overflow-hidden relative z-10 bg-[#FAFAFA] shadow-[0_0_20px_rgba(212,175,55,0.3)] border border-[#D4AF37]/30">
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#D4AF37]/40 via-transparent to-[#FBE18D]/40 mix-blend-overlay z-10 opacity-70 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              <img src={bride.photoUrl} alt={bride.name} className="w-full h-full object-cover sepia-[.35] contrast-[1.1] brightness-[1.05] group-hover:sepia-[.1] transition-all duration-700 group-hover:scale-[1.03]" />
             </div>
           </div>
           

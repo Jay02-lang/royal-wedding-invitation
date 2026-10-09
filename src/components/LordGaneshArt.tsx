@@ -10,11 +10,11 @@ export const LordGaneshArt: React.FC<{
       style={style}
     >
       {/* Outer Glow */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#6B4C0A]/10 to-transparent blur-md" />
+      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#D4AF37]/40 to-[#FBE18D]/20 blur-xl animate-pulse" />
 
       {/* The Masked Image */}
       <div
-        className="relative z-10 w-full h-full"
+        className="relative z-10 w-full h-full drop-shadow-[0_0_8px_rgba(212,175,55,0.8)]"
         style={{
           WebkitMaskImage: `url(${import.meta.env.BASE_URL}ganesha_fixed.png)`,
           WebkitMaskSize: "contain",
@@ -27,7 +27,7 @@ export const LordGaneshArt: React.FC<{
         }}
       >
         {/* We paint the mask with our custom royal golden gradient! */}
-        <div className="w-full h-full bg-gradient-to-br from-[#D4AF37] via-[#6B4C0A] to-[#805b10]" />
+        <div className="w-full h-full bg-gradient-to-br from-[#FFF5C3] via-[#D4AF37] to-[#805b10]" />
       </div>
     </div>
   );

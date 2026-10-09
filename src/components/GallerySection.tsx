@@ -31,7 +31,7 @@ const GalleryImage: React.FC<GalleryImageProps> = ({
 
   return (
     <motion.div
-      className={`absolute ${width} ${aspect} rounded-3xl overflow-hidden shadow-2xl border border-white/20`}
+      className={`absolute ${width} ${aspect} rounded-3xl overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.4)] border border-[#D4AF37]/30`}
       style={{
         scale,
         opacity,
@@ -40,10 +40,11 @@ const GalleryImage: React.FC<GalleryImageProps> = ({
         willChange: "transform, opacity",
       }}
     >
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#D4AF37]/40 via-transparent to-[#FBE18D]/40 mix-blend-overlay z-10 opacity-70 pointer-events-none" />
       <img
         src={src}
         alt="Wedding Moment"
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover sepia-[.35] contrast-[1.1] brightness-[1.05]"
       />
     </motion.div>
   );
