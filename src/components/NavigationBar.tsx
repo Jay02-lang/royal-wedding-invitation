@@ -47,7 +47,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = () => {
               <span className="font-serif text-sm font-semibold tracking-wider block text-[#1A1615]">
                 Aarav & Ananya
               </span>
-              <span className="text-[9px] font-sans uppercase tracking-[0.2em] text-[#1A1615]/60 block">
+              <span className="text-[11px] font-sans uppercase tracking-[0.2em] text-[#1A1615]/60 block">
                 Udaipur Wedding
               </span>
             </div>
@@ -59,7 +59,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#1A1615]/70 hover:text-[#1A1615] font-semibold transition-colors"
+                className="font-sans text-xs uppercase tracking-[0.2em] text-[#1A1615]/70 hover:text-[#1A1615] font-semibold transition-colors"
               >
                 {link.label}
               </a>
@@ -118,7 +118,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = () => {
               <span className="font-serif text-sm font-semibold tracking-wider block text-[#1A1615]">
                 Aarav & Ananya
               </span>
-              <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-[#1A1615]/60 mt-2 block">
+              <span className="text-xs font-sans uppercase tracking-[0.2em] text-[#1A1615]/60 mt-2 block">
                 Udaipur Wedding
               </span>
             </div>

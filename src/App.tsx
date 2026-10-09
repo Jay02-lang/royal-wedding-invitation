@@ -11,6 +11,9 @@ import { ItinerarySection } from './components/ItinerarySection';
 import { PalaceConcierge } from './components/PalaceConcierge';
 import { GallerySection } from './components/GallerySection';
 import { BlessingWall } from './components/BlessingWall';
+import { LordGaneshArt } from './components/LordGaneshArt';
+import { CodeFloralPattern } from './components/CodeFloralPattern';
+import { WildflowerBirds } from './components/WildflowerBirds';
 
 import { Heart, Sparkles } from 'lucide-react';
 
@@ -63,7 +66,7 @@ export default function App() {
       <BackgroundVideo
         videoSrc={WEDDING_DATA.backgroundVideoUrl}
         posterSrc={WEDDING_DATA.backgroundFallbackPoster}
-        overlayOpacity="bg-white/40 backdrop-blur-sm"
+        overlayOpacity="bg-white/15"
       />
 
       {/* The Envelope Layer (Full Screen overlay, unmounts itself when opened) */}
@@ -73,8 +76,9 @@ export default function App() {
       />
 
       {/* Main Content Choreography (Always renders underneath, ready when envelope fades) */}
-      <main className="relative z-20 pt-4 pb-28 md:pb-20 space-y-0 md:space-y-6">
-        
+      <main className="relative z-20 pt-6 pb-28 md:pb-20 space-y-8 md:space-y-16">
+
+
         {/* Primary Invitation Letter & Countdown Timer */}
         <InvitationHero
           weddingData={WEDDING_DATA}
@@ -112,38 +116,40 @@ export default function App() {
       </main>
 
       {/* Grand Footer */}
-      <footer className="relative z-20 bg-[#1A1615] text-[#FAFAFA] py-24 px-4 text-center mt-32">
-        <div className="max-w-4xl mx-auto flex flex-col items-center">
-          
-          <span className="font-serif italic text-2xl text-[#D4AF37] mb-8 font-medium">
-            With Love & Blessings
-          </span>
+      <footer className="relative z-20 bg-[#1A1615] text-[#FAFAFA] py-32 px-4 text-center mt-16 overflow-hidden">
+        {/* Floral Background for Footer (Covers full height left and right) */}
+        <div className="absolute inset-0 pointer-events-none text-[#C5A059] opacity-[0.09]">
+          <div className="absolute top-0 bottom-0 left-0 w-[45vw] sm:w-[40vw] max-w-[420px]">
+            <CodeFloralPattern className="w-full h-full object-fill" preserveAspectRatio="none" />
+          </div>
+          <div className="absolute top-0 bottom-0 right-0 w-[45vw] sm:w-[35vw] max-w-[380px] scale-x-[-1]">
+            <WildflowerBirds className="w-full h-full object-fill" preserveAspectRatio="none" />
+          </div>
+        </div>
 
-          <h2 className="font-serif text-5xl md:text-7xl font-light mb-6 tracking-wide">
-            Aarav & Ananya
+        <div className="max-w-4xl mx-auto flex flex-col items-center relative z-10">
+          
+          <LordGaneshArt className="w-14 h-14 mb-16 opacity-90" />
+
+          <h2 className="font-serif text-5xl sm:text-6xl md:text-7xl text-[#C5A059] font-normal tracking-widest uppercase mb-10">
+            Aarav <span className="font-serif italic font-light">&</span> Ananya
           </h2>
 
-          <div className="w-24 h-[1px] bg-[#D4AF37]/40 mb-12" />
+          <div className="w-64 h-[1px] bg-[#C5A059]/30 mb-12" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-32 text-sm md:text-base font-sans tracking-widest uppercase text-[#FAFAFA]/70">
-            <div className="flex flex-col space-y-2">
-              <span className="text-[#D4AF37] font-serif italic normal-case text-xl mb-3">The Groom's Family</span>
-              <span>Shri Vikramaditya Singh</span>
-              <span>Shrimati Gayatri Devi</span>
-              <span>House of Mewar</span>
-            </div>
-            <div className="flex flex-col space-y-2">
-              <span className="text-[#D4AF37] font-serif italic normal-case text-xl mb-3">The Bride's Family</span>
-              <span>Shri Digvijay Singh Rathore</span>
-              <span>Shrimati Radhika Devi</span>
-              <span>House of Jaipur</span>
-            </div>
+          <div className="font-serif italic text-lg sm:text-xl text-[#C5A059] mb-20 leading-[2.2]">
+            <p>"मङ्गलं भगवान् विष्णुर्मङ्गलं गरुडध्वजः।</p>
+            <p>मङ्गलं पुण्डरीकाक्षो मङ्गलायतनो हरिः॥"</p>
           </div>
 
-          <div className="mt-20 flex flex-col items-center opacity-50">
-            <p className="font-sans text-[10px] tracking-[0.4em] uppercase">
-              November 26-28, 2026 • Udaipur, Rajasthan
-            </p>
+          <div className="flex flex-col items-center gap-5">
+            <span className="font-sans text-xs sm:text-sm tracking-[0.4em] uppercase text-[#FAFAFA]/90 font-bold">
+              We Eagerly Await Your Presence
+            </span>
+            <span className="font-sans text-[11px] tracking-[0.3em] uppercase text-[#FAFAFA]/40 font-semibold">
+              Udaipur, Rajasthan
+            </span>
           </div>
+
         </div>
       </footer></div>);}

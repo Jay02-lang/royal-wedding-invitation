@@ -10,7 +10,7 @@ export interface CoupleIntroProps {
 
 export const CoupleIntro: React.FC<CoupleIntroProps> = ({ groom, bride }) => {
   return (
-    <section className="relative w-full flex flex-col max-w-6xl mx-auto px-2 sm:px-4 pt-2 pb-2 md:pb-16 overflow-hidden bg-transparent">
+    <section className="relative w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] flex flex-col max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-10 md:pt-16 md:pb-20 overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[12px] rounded-[2rem] border border-white/40 shadow-2xl">
       
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -37,7 +37,7 @@ export const CoupleIntro: React.FC<CoupleIntroProps> = ({ groom, bride }) => {
             {groom.name}
           </h3>
           <div className="w-6 sm:w-10 h-px bg-[#6B4C0A]/40 mb-4" />
-          <p className="text-[8px] sm:text-[10px] md:text-xs font-sans uppercase tracking-[0.3em] text-[#6B4C0A]/80 mb-6 drop-shadow-sm px-1">
+          <p className="text-[10px] sm:text-xs md:text-sm font-sans uppercase tracking-[0.3em] text-[#6B4C0A]/80 mb-6 drop-shadow-sm px-1">
             {groom.parents}
           </p>
           <p className="font-serif text-xs sm:text-sm md:text-base text-[#1A1615]/80 leading-relaxed italic px-1 sm:px-2">
@@ -70,7 +70,7 @@ export const CoupleIntro: React.FC<CoupleIntroProps> = ({ groom, bride }) => {
             {bride.name}
           </h3>
           <div className="w-6 sm:w-10 h-px bg-[#6B4C0A]/40 mb-4" />
-          <p className="text-[8px] sm:text-[10px] md:text-xs font-sans uppercase tracking-[0.3em] text-[#6B4C0A]/80 mb-6 drop-shadow-sm px-1">
+          <p className="text-[10px] sm:text-xs md:text-sm font-sans uppercase tracking-[0.3em] text-[#6B4C0A]/80 mb-6 drop-shadow-sm px-1">
             {bride.parents}
           </p>
           <p className="font-serif text-xs sm:text-sm md:text-base text-[#1A1615]/80 leading-relaxed italic px-1 sm:px-2">

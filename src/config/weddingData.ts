@@ -12,7 +12,7 @@ export const WEDDING_DATA: WeddingConfig = {
     title: 'Maharaj Kunwar Aarav',
     royalLineage: 'House of Sisodia & House of Mewar',
     parents: 'Son of Shri Vikramaditya Singh & Shrimati Gayatri Devi',
-    about: 'An alumnus of Oxford and classical horseman, Aarav honors centuries of timeless Mewar heritage with a contemporary global vision for art and sustainable preservation.',
+    about: 'An alumnus of Oxford and classical horseman honoring timeless Mewar heritage.',
     photoUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80'
   },
   bride: {
@@ -20,7 +20,7 @@ export const WEDDING_DATA: WeddingConfig = {
     title: 'Rajkumari Ananya',
     royalLineage: 'House of Jaipur & Kachhwaha Dynasty',
     parents: 'Daughter of Shri Digvijay Singh Rathore & Shrimati Radhika Devi',
-    about: 'An accomplished classical Odissi dancer and architectural conservationist, Ananya weaves grace, intellect, and profound reverence for imperial Rajasthani craftsmanship.',
+    about: 'An accomplished Odissi dancer and architectural conservationist weaving grace and intellect.',
     photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80'
   },
   mainWeddingDate: '2026-11-28T16:30:00+05:30', // Big Day: Pheras at sunset

@@ -4,15 +4,17 @@ import React from "react";
 export const WildflowerBirds = ({
   className,
   style,
+  preserveAspectRatio = "xMidYMid meet",
 }: {
   className?: string;
   style?: React.CSSProperties;
+  preserveAspectRatio?: string;
 }) => (
   <svg
     viewBox="0 0 571 1024" // We'll let preserveAspectRatio scale it
     className={className}
     style={style}
-    preserveAspectRatio="xMidYMid meet"
+    preserveAspectRatio={preserveAspectRatio}
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
   >

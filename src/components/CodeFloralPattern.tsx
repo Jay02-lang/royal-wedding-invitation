@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export const CodeFloralPattern: React.FC<{ className?: string }> = ({ className = '' }) => {
+export const CodeFloralPattern: React.FC<{ className?: string; preserveAspectRatio?: string }> = ({ className = '', preserveAspectRatio = 'xMidYMid meet' }) => {
   return (
     <svg 
       viewBox="0 0 571 1024" 
-      preserveAspectRatio="xMidYMid meet"
+      preserveAspectRatio={preserveAspectRatio}
       className={`pointer-events-none ${className}`} 
       xmlns="http://www.w3.org/2000/svg"
     >

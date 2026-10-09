@@ -13,7 +13,7 @@ export const InvitationHero: React.FC<InvitationHeroProps> = ({
   onReplayEnvelope,
 }) => {
   return (
-    <section className="relative min-h-[75dvh] w-full flex flex-col items-center justify-center px-4 pt-8 pb-4 text-center select-none overflow-hidden">
+    <section className="relative min-h-[75dvh] w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] max-w-6xl mx-auto flex flex-col items-center justify-center px-4 pt-8 pb-4 text-center select-none overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[12px] rounded-[2rem] border border-white/40 shadow-2xl">
       <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center z-10">
         {/* Ganesha Art (Very Top) */}
         <motion.div

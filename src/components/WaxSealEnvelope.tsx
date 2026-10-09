@@ -198,10 +198,20 @@ export const WaxSealEnvelope: React.FC<WaxSealEnvelopeProps> = ({
             animate={{ opacity: internalOpen ? 0 : [0.4, 1, 0.4] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            <p className="font-sans text-[11px] md:text-sm tracking-[0.4em] uppercase text-[#D4AF37] drop-shadow-lg whitespace-nowrap font-semibold">
+            <p className="font-sans text-xs md:text-sm tracking-[0.4em] uppercase text-[#D4AF37] drop-shadow-lg whitespace-nowrap font-semibold">
               Tap the seal to open
             </p>
           </motion.div>
+
+          {/* Quick Access Action in Corner */}
+          {!internalOpen && (
+            <button
+              onClick={handleSealClick}
+              className="absolute top-6 right-6 z-40 px-4 py-2 rounded-full border border-[#D4AF37]/50 bg-black/50 text-[#F7E5A9] text-xs md:text-xs uppercase tracking-[0.2em] hover:bg-[#D4AF37] hover:text-[#170206] transition-all cursor-pointer font-sans shadow-lg"
+            >
+              Enter Invitation →
+            </button>
+          )}
         </motion.div>
       )}
     </AnimatePresence>

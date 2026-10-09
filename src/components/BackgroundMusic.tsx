@@ -240,7 +240,7 @@ export const BackgroundMusic: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
           >
-            <span className="text-[10px] font-sans uppercase tracking-[0.3em] text-[#6B4C0A] font-bold bg-white/85 backdrop-blur-sm px-3 py-1.5 rounded-full border border-[#6B4C0A]/30 shadow-md whitespace-nowrap">
+            <span className="text-xs font-sans uppercase tracking-[0.3em] text-[#6B4C0A] font-bold bg-white/85 backdrop-blur-sm px-3 py-1.5 rounded-full border border-[#6B4C0A]/30 shadow-md whitespace-nowrap">
               ♪ Indian Flute
             </span>
           </motion.div>

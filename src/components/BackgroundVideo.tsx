@@ -22,10 +22,47 @@ export function shouldShowFallback(hasError: boolean, src: string): boolean {
   return hasError || !src || src.trim().length === 0;
 }
 
+export function getCandidateVideoSources(base: string, videoSrc: string): string[] {
+  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+  const candidates: string[] = [];
+
+  let resolvedSrc = videoSrc;
+  if (
+    videoSrc &&
+    !videoSrc.startsWith("http://") &&
+    !videoSrc.startsWith("https://") &&
+    !videoSrc.startsWith("data:")
+  ) {
+    const cleanPath = videoSrc.replace(/^\.?\//, "");
+    resolvedSrc = `${normalizedBase}${cleanPath}`;
+  }
+
+  if (resolvedSrc) candidates.push(resolvedSrc);
+
+  const fallbacks = [
+    `${normalizedBase}video/14249219_1920_1080_100fps.mp4`,
+    `${normalizedBase}14249219_1920_1080_100fps.mp4`,
+    `${normalizedBase}video/wedding-bg.mp4`,
+    `${normalizedBase}wedding-bg.mp4`,
+    "/video/14249219_1920_1080_100fps.mp4",
+    "/14249219_1920_1080_100fps.mp4",
+    "./video/14249219_1920_1080_100fps.mp4",
+    "./14249219_1920_1080_100fps.mp4",
+  ];
+
+  for (const src of fallbacks) {
+    if (!candidates.includes(src)) {
+      candidates.push(src);
+    }
+  }
+
+  return candidates;
+}
+
 export const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
   videoSrc,
   posterSrc = "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2000&q=85",
-  overlayOpacity = "bg-white/40 backdrop-blur-sm",
+  overlayOpacity = "bg-white/15",
 }) => {
   const [hasError, setHasError] = useState(false);
   const videoRef = React.useRef<HTMLVideoElement>(null);
@@ -46,17 +83,41 @@ export const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
     return `${base}${cleanPath}`;
   }, [videoSrc]);
 
+  // Multiple candidate sources to guarantee playback regardless of root vs subfolder
+  const candidateSources = React.useMemo(() => {
+    return getCandidateVideoSources(import.meta.env.BASE_URL, videoSrc);
+  }, [videoSrc]);
+
   React.useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.defaultMuted = true;
-      videoRef.current.muted = true;
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn("Background video autoplay blocked:", err);
-        });
+    const playVideo = () => {
+      if (videoRef.current) {
+        videoRef.current.defaultMuted = true;
+        videoRef.current.muted = true;
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((err) => {
+            console.warn("Background video autoplay blocked:", err);
+          });
+        }
       }
-    }
+    };
+
+    playVideo();
+
+    // User gesture listener to guarantee playback if browser autoplay policy blocks unprompted autoplay
+    const handleInteraction = () => {
+      playVideo();
+    };
+
+    window.addEventListener("click", handleInteraction, { once: true, passive: true });
+    window.addEventListener("touchstart", handleInteraction, { once: true, passive: true });
+    window.addEventListener("scroll", handleInteraction, { once: true, passive: true });
+
+    return () => {
+      window.removeEventListener("click", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
+      window.removeEventListener("scroll", handleInteraction);
+    };
   }, [resolvedVideoSrc]);
 
   const playbackProps = getVideoPlaybackProps();
@@ -68,14 +129,17 @@ export const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
         <video
           ref={videoRef}
           {...playbackProps}
-          src={resolvedVideoSrc}
           poster={posterSrc}
           onError={(e) => {
             console.error("Video load error for:", resolvedVideoSrc, e);
             setHasError(true);
           }}
           className="w-full h-full object-cover scale-105 motion-safe:transition-transform duration-1000"
-        />
+        >
+          {candidateSources.map((src) => (
+            <source key={src} src={src} type="video/mp4" />
+          ))}
+        </video>
       ) : (
         <div
           className="w-full h-full bg-cover bg-center transition-opacity duration-1000 scale-105"
@@ -86,29 +150,13 @@ export const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
         </div>
       )}
 
-      {/* Main Opacity Overlay */}
-      <div
-        className={`absolute inset-0 ${overlayOpacity}`}
-      />
+      {/* Main Opacity Overlay - Sheer tint without heavy blur for crisp video visibility */}
+      <div className={`absolute inset-0 ${overlayOpacity}`} />
 
-      {/* PURE CODE Floral Background Pattern (Above video, low opacity) */}
-      
-      {/* PURE CODE Floral Art (Delicate, thin, and small, No copy-paste grid) */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden mix-blend-multiply text-[#1c2e1f] opacity-20">
-        {/* Left Side: Original Uploaded Artwork */}
-        <div className="absolute bottom-0 left-0 w-[90vw] sm:w-[45vw] max-w-[450px] mix-blend-multiply opacity-80">
-           <CodeFloralPattern className="w-full h-auto" />
-        </div>
-        
-        {/* Right Side: Different Delicate Artwork (No copy paste, flipped horizontally so birds are upright) */}
-        <div className="absolute bottom-0 right-0 w-[80vw] sm:w-[40vw] max-w-[400px] mix-blend-multiply opacity-60 scale-x-[-1]">
-           <WildflowerBirds className="w-full h-auto" />
-        </div>
-      </div>
 
 
       {/* Subtle radial luxury vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(18,4,7,0.3)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(18,4,7,0.25)_100%)]" />
 
       {/* Subtle gold ambient glow at corners */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#D4AF37]/10 blur-3xl rounded-full mix-blend-overlay" />

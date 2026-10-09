@@ -15,7 +15,7 @@ export const PalaceConcierge: React.FC<PalaceConciergeProps> = ({
   return (
     <section
       id="venue"
-      className="relative w-full flex flex-col items-center px-4 py-12 md:py-16 overflow-hidden bg-transparent"
+      className="relative w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] max-w-6xl mx-auto flex flex-col items-center px-4 pt-12 pb-8 md:pt-16 md:pb-12 overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[12px] rounded-[2rem] border border-white/40 shadow-2xl"
     >
       {" "}
       {/* Procedural Botanicals */}{" "}
@@ -118,7 +118,7 @@ export const PalaceConcierge: React.FC<PalaceConciergeProps> = ({
                     docks.{" "}
                   </p>{" "}
                   <OrnamentDivider width={140} className="my-10" />{" "}
-                  <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#1A1615]/60 font-semibold">
+                  <span className="font-sans text-xs uppercase tracking-[0.2em] text-[#1A1615]/60 font-semibold">
                     {" "}
                     Boats depart every 15 minutes starting at 4:00 PM.{" "}
                   </span>{" "}
