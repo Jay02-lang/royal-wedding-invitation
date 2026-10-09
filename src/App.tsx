@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Lenis from 'lenis';
 import { WEDDING_DATA } from './config/weddingData';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { GuestBlessing } from './types/wedding';
@@ -50,6 +51,22 @@ export default function App() {
       window.history.scrollRestoration = 'manual';
     }
     window.scrollTo(0, 0);
+    
+    // Initialize Smooth Scrolling (Lenis)
+    const lenis = new Lenis({
+      autoRaf: true,
+      duration: 1.5,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Effortless exponential easing
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
+    });
+
+    return () => {
+      lenis.destroy();
+    };
   }, []);
     
   // Persistent Blessings in localStorage

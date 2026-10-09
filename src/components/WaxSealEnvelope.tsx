@@ -32,16 +32,16 @@ export const WaxSealEnvelope: React.FC<WaxSealEnvelopeProps> = ({
     if (internalOpen) return;
     setInternalOpen(true);
     onOpen();
-    setTimeout(() => setIsFullyUnmounted(true), 1200); // Wait for flap animations to finish before unmounting
+    setTimeout(() => setIsFullyUnmounted(true), 1200); // Start dissolving into the main site after 1.2s
   };
 
   return (
     <AnimatePresence>
       {!isFullyUnmounted && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-[#1A1615]"
+          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-[#1A1615] [perspective:2000px]"
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.8, ease: "easeInOut" }}
         >
           {/* Envelope Backing (Dark behind flaps, flashes to pure white on open) */}
           <div className="absolute inset-0 bg-[#170206]">
@@ -60,7 +60,7 @@ export const WaxSealEnvelope: React.FC<WaxSealEnvelopeProps> = ({
             className="absolute inset-0 z-20 pointer-events-none overflow-hidden origin-left"
             initial={{ rotateY: 0 }}
             animate={{ rotateY: internalOpen ? -180 : 0 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
             style={{
               clipPath: "polygon(0% 0%, 50% 50%, 0% 100%)",
               background: "linear-gradient(135deg, #2A040D 0%, #170206 100%)",
@@ -83,7 +83,7 @@ export const WaxSealEnvelope: React.FC<WaxSealEnvelopeProps> = ({
             className="absolute inset-0 z-20 pointer-events-none overflow-hidden origin-right"
             initial={{ rotateY: 0 }}
             animate={{ rotateY: internalOpen ? 180 : 0 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
             style={{
               clipPath: "polygon(100% 0%, 50% 50%, 100% 100%)",
               background: "linear-gradient(225deg, #2A040D 0%, #170206 100%)",
@@ -106,7 +106,7 @@ export const WaxSealEnvelope: React.FC<WaxSealEnvelopeProps> = ({
             className="absolute inset-0 z-20 pointer-events-none overflow-hidden origin-bottom"
             initial={{ rotateX: 0 }}
             animate={{ rotateX: internalOpen ? -180 : 0 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
             style={{
               clipPath: "polygon(0% 100%, 50% 50%, 100% 100%)",
               background: "linear-gradient(0deg, #170206 0%, #2A040D 100%)",
@@ -129,7 +129,7 @@ export const WaxSealEnvelope: React.FC<WaxSealEnvelopeProps> = ({
             className="absolute inset-0 z-30 origin-top overflow-hidden"
             initial={{ rotateX: 0 }}
             animate={{ rotateX: internalOpen ? 180 : 0 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
             style={{
               clipPath: "polygon(0% 0%, 100% 0%, 50% 55%)",
               background: "linear-gradient(180deg, #380813 0%, #1A0308 100%)",

@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { WeddingEvent } from "../types/wedding";
 import { generateGoogleCalendarUrl } from "../utils/calendar";
 import { MapPin, Clock, Calendar } from "lucide-react";
@@ -12,9 +12,18 @@ export interface ItinerarySectionProps {
 export const ItinerarySection: React.FC<ItinerarySectionProps> = ({
   events,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"],
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
     <section
       id="itinerary"
+      ref={containerRef}
       className="relative w-full flex flex-col items-center justify-center px-4 py-20 md:py-28 overflow-hidden bg-[#FAFAFA]/35 backdrop-blur-[2px] sm:backdrop-blur-[12px] border-y border-white/40 shadow-2xl"
     >
       <div className="max-w-[1200px] mx-auto w-full relative z-10 flex flex-col items-center">
@@ -33,28 +42,40 @@ export const ItinerarySection: React.FC<ItinerarySectionProps> = ({
         {/* Vertical Timeline - Desktop */}
         <div className="relative w-full hidden md:block mt-8">
           {/* Center Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-[#6B4C0A]/30 -translate-x-1/2" />
+          <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-[#6B4C0A]/20 -translate-x-1/2" />
+          <motion.div
+            className="absolute left-1/2 top-0 w-[1px] bg-[#6B4C0A] -translate-x-1/2 origin-top"
+            style={{ height: lineHeight }}
+          />
 
           <div className="flex flex-col gap-32 w-full">
             {events.map((evt, index) => {
               const isEven = index % 2 === 0;
 
               return (
-                <motion.div
+                <div
                   key={evt.id}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 1, ease: "easeOut" }}
                   className={`relative flex items-center justify-between w-full ${
                     isEven ? "flex-row" : "flex-row-reverse"
                   }`}
                 >
                   {/* Timeline Dot */}
-                  <div className="absolute left-1/2 w-3.5 h-3.5 rounded-full bg-[#1A1615] -translate-x-1/2 shadow-[0_0_0_8px_rgba(230,220,205,0.4)] z-10" />
+                  <motion.div 
+                    initial={{ backgroundColor: "#1A1615", boxShadow: "0 0 0 8px rgba(230,220,205,0.4)" }}
+                    whileInView={{ backgroundColor: "#D4AF37", boxShadow: "0 0 15px rgba(212,175,55,0.8), 0 0 0 8px rgba(212,175,55,0.2)" }}
+                    viewport={{ once: false, margin: "1000px 0px -50% 0px" }}
+                    transition={{ duration: 0.4 }}
+                    className="absolute left-1/2 w-4 h-4 rounded-full -translate-x-1/2 z-10" 
+                  />
 
                   {/* Text Content */}
-                  <div className={`w-[45%] flex flex-col ${isEven ? 'items-end text-right' : 'items-start text-left'}`}>
+                  <motion.div 
+                    initial={{ opacity: 0, x: isEven ? -60 : 60 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className={`w-[45%] flex flex-col ${isEven ? 'items-end text-right' : 'items-start text-left'}`}
+                  >
                     <div className="flex items-center gap-3 text-[#6B4C0A] font-sans text-xs font-bold tracking-[0.2em] uppercase mb-4">
                       <span>Day {evt.dayNumber}</span>
                       <span className="opacity-50">|</span>
@@ -94,10 +115,16 @@ export const ItinerarySection: React.FC<ItinerarySectionProps> = ({
                       <Calendar className="w-3.5 h-3.5" />
                       Add to Calendar
                     </a>
-                  </div>
+                  </motion.div>
 
-                  {/* Image Content Placeholder (matching screenshot behavior) */}
-                  <div className={`w-[45%] flex ${isEven ? 'justify-start' : 'justify-end'}`}>
+                  {/* Image Content Placeholder */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 60 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className={`w-[45%] flex ${isEven ? 'justify-start' : 'justify-end'}`}
+                  >
                     <div className="w-full max-w-[500px] aspect-[4/3] rounded-[32px] overflow-hidden shadow-sm relative">
                       <img 
                         src={`/images/events/${evt.id}.jpg`} 
@@ -105,8 +132,8 @@ export const ItinerarySection: React.FC<ItinerarySectionProps> = ({
                         className="w-full h-full object-cover bg-[#E5DCD3]/50 text-xs text-[#1A1615]/50 border border-[#1A1615]/5 rounded-[32px]"
                       />
                     </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </div>
               );
             })}
           </div>
@@ -117,10 +144,10 @@ export const ItinerarySection: React.FC<ItinerarySectionProps> = ({
           {events.map((evt, index) => (
              <motion.div
              key={evt.id}
-             initial={{ opacity: 0, y: 30 }}
+             initial={{ opacity: 0, y: 40 }}
              whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true, margin: "-50px" }}
-             transition={{ duration: 0.8, ease: "easeOut" }}
+             viewport={{ once: false, amount: 0.15 }}
+             transition={{ duration: 0.6, ease: "easeOut" }}
              className="flex flex-col items-center text-center w-full"
            >
              <div className="flex items-center gap-2 text-[#6B4C0A] font-sans text-[10px] font-bold tracking-[0.2em] uppercase mb-4">

@@ -12,6 +12,8 @@ export const PalaceConcierge: React.FC<PalaceConciergeProps> = ({
   const [activeTab, setActiveTab] = useState<
     "venue" | "transit" | "stay" | "weather"
   >("venue");
+  const [isMapInteractive, setIsMapInteractive] = useState(false);
+
   return (
     <section
       id="venue"
@@ -91,16 +93,27 @@ export const PalaceConcierge: React.FC<PalaceConciergeProps> = ({
                     the shimmering waters of Lake Pichola, our wedding takes
                     place within the historic grand palaces of Udaipur.{" "}
                   </p>{" "}
-                  <a
-                    href="https://goo.gl/maps/udaivilas"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-[#6B4C0A] font-sans text-xs tracking-widest uppercase hover:text-[#5A1222] transition-colors"
+                  <div 
+                    className="relative w-full mt-8 h-[300px] sm:h-[400px] rounded-2xl overflow-hidden shadow-lg border border-white/20 cursor-pointer"
+                    onClick={() => setIsMapInteractive(true)}
+                    onMouseLeave={() => setIsMapInteractive(false)}
                   >
-                    {" "}
-                    <MapPin className="w-4 h-4" />{" "}
-                    <span>View Map & Directions</span>{" "}
-                  </a>{" "}
+                    {!isMapInteractive && (
+                      <div className="absolute inset-0 z-10 bg-[#6B4C0A]/5 flex items-center justify-center transition-colors hover:bg-[#6B4C0A]/10">
+                        <span className="bg-[#FAFAFA]/95 text-[#1A1615] px-6 py-2.5 rounded-full font-sans text-xs uppercase tracking-widest font-bold shadow-lg pointer-events-none backdrop-blur-sm border border-[#6B4C0A]/10">
+                          Tap to interact
+                        </span>
+                      </div>
+                    )}
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3628.026418804368!2d73.66870307611883!3d24.588323658826725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3967e5a6a6a4a457%3A0xc023c92e7c4ef5e9!2sThe%20Oberoi%20Udaivilas%2C%20Udaipur!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                      className={`w-full h-full border-0 transition-opacity duration-300 ${!isMapInteractive ? 'opacity-80 pointer-events-none grayscale-[0.2]' : 'opacity-100'}`}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="The Oberoi Udaivilas Map"
+                    ></iframe>
+                  </div>
                 </>
               )}{" "}
               {activeTab === "transit" && (
