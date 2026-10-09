@@ -17,10 +17,10 @@ export const CoupleIntro: React.FC<CoupleIntroProps> = ({ groom, bride }) => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-row items-start justify-center gap-4 sm:gap-12 md:gap-32"
+        className="flex flex-col sm:flex-row items-center sm:items-start justify-center gap-4 sm:gap-12 md:gap-32 w-full"
       >
         {/* Groom Profile */}
-        <div className="flex flex-col items-center text-center w-1/2 max-w-[280px]">
+        <div className="flex flex-col items-center text-center w-full sm:w-1/2 max-w-[280px] sm:max-w-[320px]">
           {/* Refined Classic Arch Portrait */}
           <div className="relative mb-8 sm:mb-10 mt-4 group">
             {/* Single delicate offset frame */}
@@ -45,15 +45,22 @@ export const CoupleIntro: React.FC<CoupleIntroProps> = ({ groom, bride }) => {
           </p>
         </div>
 
-        {/* Ultra-Refined Vertical Spine */}
-        <div className="flex flex-col items-center opacity-100 shrink-0 mt-16 sm:mt-24 md:mt-20">
+        {/* Ultra-Refined Vertical Spine (Hidden on Mobile) */}
+        <div className="hidden sm:flex flex-col items-center opacity-100 shrink-0 mt-16 sm:mt-24 md:mt-20">
           <div className="w-px h-16 sm:h-24 md:h-32 bg-gradient-to-b from-transparent to-[#6B4C0A]" />
           <MinimalFloral className="w-16 h-16 sm:w-24 sm:h-24 text-[#6B4C0A] my-4 sm:my-6 drop-shadow-sm" />
           <div className="w-px h-16 sm:h-24 md:h-32 bg-gradient-to-t from-transparent to-[#6B4C0A]" />
         </div>
 
+        {/* Mobile Horizontal Divider */}
+        <div className="flex sm:hidden flex-row items-center w-full justify-center my-6 opacity-100 shrink-0">
+          <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#6B4C0A]" />
+          <MinimalFloral className="w-10 h-10 text-[#6B4C0A] mx-4 drop-shadow-sm" />
+          <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#6B4C0A]" />
+        </div>
+
         {/* Bride Profile */}
-        <div className="flex flex-col items-center text-center w-1/2 max-w-[280px]">
+        <div className="flex flex-col items-center text-center w-full sm:w-1/2 max-w-[280px] sm:max-w-[320px]">
           {/* Refined Classic Arch Portrait */}
           <div className="relative mb-8 sm:mb-10 mt-4 group">
             {/* Single delicate offset frame */}
