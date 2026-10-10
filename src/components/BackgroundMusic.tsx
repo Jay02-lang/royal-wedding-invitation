@@ -1,19 +1,26 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
-export const BackgroundMusic: React.FC = () => {
-  const [isMuted, setIsMuted] = useState(true);
+interface BackgroundMusicProps {
+  isPlaying?: boolean;
+}
+
+export const BackgroundMusic: React.FC<BackgroundMusicProps> = ({ isPlaying = true }) => {
+  const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    // Attempt to auto-play (browsers usually require it to be muted initially or user interaction)
     if (audioRef.current) {
       audioRef.current.volume = 0.4; // Soft background volume
-      audioRef.current.play().catch((err) => {
-        console.warn("Autoplay was blocked by browser:", err);
-      });
+      if (isPlaying) {
+        audioRef.current.play().catch((err) => {
+          console.warn("Autoplay was blocked by browser:", err);
+        });
+      } else {
+        audioRef.current.pause();
+      }
     }
-  }, []);
+  }, [isPlaying]);
 
   const toggleMute = () => {
     if (audioRef.current) {

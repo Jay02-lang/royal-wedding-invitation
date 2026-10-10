@@ -80,7 +80,7 @@ export default function App() {
   return (
     <div className="min-h-[100dvh] bg-transparent text-[#1A1A1A] font-sans antialiased relative selection:bg-[#D4AF37] selection:text-[#FAFAFA]">
       
-      <BackgroundMusic />
+      <BackgroundMusic isPlaying={isEnvelopeOpen} />
       
       {/* 1. Customizable Background Video Layer with Fallbacks */}
       <BackgroundVideo
