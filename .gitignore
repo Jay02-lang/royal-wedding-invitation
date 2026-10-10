@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-ssr
+*.local
+.superpowers
+.DS_Store
+
+# Temporary scratch scripts and files
+*.cjs
+*.py
+temp_*.png
