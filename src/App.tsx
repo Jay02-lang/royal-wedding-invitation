@@ -15,6 +15,7 @@ import { BlessingWall } from './components/BlessingWall';
 import { LordGaneshArt } from './components/LordGaneshArt';
 import { CodeFloralPattern } from './components/CodeFloralPattern';
 import { WildflowerBirds } from './components/WildflowerBirds';
+import { BackgroundMusic } from './components/BackgroundMusic';
 
 import { Heart, Sparkles } from 'lucide-react';
 
@@ -78,6 +79,8 @@ export default function App() {
 
   return (
     <div className="min-h-[100dvh] bg-transparent text-[#1A1A1A] font-sans antialiased relative selection:bg-[#D4AF37] selection:text-[#FAFAFA]">
+      
+      <BackgroundMusic />
       
       {/* 1. Customizable Background Video Layer with Fallbacks */}
       <BackgroundVideo
