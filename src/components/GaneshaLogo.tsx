@@ -9,8 +9,8 @@ export const GaneshaLogo: React.FC<GaneshaLogoProps> = ({
 }) => {
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
-      {/* Outer Glow */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#b87333]/40 to-[#ffb380]/20 blur-xl animate-pulse" />
+      {/* Outer Glow - Optimized without CSS blur */}
+      <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(184,115,51,0.4)_0%,transparent_70%)] animate-pulse" />
 
       {/* The Masked Image */}
       <div

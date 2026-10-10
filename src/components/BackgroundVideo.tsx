@@ -158,9 +158,9 @@ export const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
       {/* Subtle radial luxury vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(18,4,7,0.25)_100%)]" />
 
-      {/* Subtle gold ambient glow at corners */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-[#D4AF37]/10 blur-3xl rounded-full mix-blend-overlay" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#D4AF37]/10 blur-3xl rounded-full mix-blend-overlay" />
+      {/* Subtle gold ambient glow at corners - Optimized without CSS blur */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.1)_0%,transparent_70%)] rounded-full mix-blend-overlay" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.1)_0%,transparent_70%)] rounded-full mix-blend-overlay" />
     </div>
   );
 };
