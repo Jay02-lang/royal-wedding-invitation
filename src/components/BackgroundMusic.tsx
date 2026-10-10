@@ -42,7 +42,7 @@ export const BackgroundMusic: React.FC<BackgroundMusicProps> = ({ isPlaying = tr
       {/* Romantic instrumental background song */}
       <audio
         ref={audioRef}
-        src="/background_music.mpeg"
+        src={`${import.meta.env.BASE_URL}background_music.mpeg`}
         loop
         muted={isMuted}
         playsInline
